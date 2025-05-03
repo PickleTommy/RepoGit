@@ -1,52 +1,40 @@
-﻿Public Class Form1
-    Private integrantes As New List(Of Integrante)()
+﻿Imports MySql.Data.MySqlClient
 
-    Private Sub AgregarIntegrante(sender As Object, e As EventArgs) Handles AddIntegrante.Click
-        ' Crear una instancia del formulario AgregarFamiliar
-        Dim agregarFamiliarForm As New AgregarFamiliar(integrantes)
+Public Class Form1
+    Private miConexion As MySqlConnection
 
-        ' Mostrar el formulario
-        agregarFamiliarForm.ShowDialog()
-
-        ' Actualizar la lista de integrantes después de cerrar el formulario
-        integrantes = agregarFamiliarForm.ObtenerIntegrantes()
-
-        ' Confirmar al usuario que ha regresado al menú principal
-        MessageBox.Show("Has regresado al menú principal.", "Información")
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        miConexion = New MySqlConnection("Server=LocalHost;Database=bdproyectoprog;Uid=root;Pwd=;")
+        ' No es necesario abrir la conexión aquí
     End Sub
 
-    Private Sub MostrarIntegrante(sender As Object, e As EventArgs) Handles Button1.Click
-        ' Verificar si hay integrantes en la lista
-        If integrantes.Count = 0 Then
-            MessageBox.Show("No hay integrantes para mostrar.", "Error")
-            Return
-        End If
+    Private Sub Log_Click(sender As Object, e As EventArgs) Handles Log.Click
+        Try
 
-        ' Obtener el último integrante agregado
-        Dim ultimoIntegrante As Integrante = integrantes.Last()
+            ' Consulta SQL con parámetros
+            Dim consulta As String = "SELECT * FROM usuarios WHERE NombreUsuario= @Usuario AND Contraseña = @Contraseña"
+            Dim adaptador As New MySqlDataAdapter(consulta, miConexion)
+            adaptador.SelectCommand.Parameters.AddWithValue("@Usuario", txtUsuario.Text.Trim())
+            adaptador.SelectCommand.Parameters.AddWithValue("@Contraseña", txtContraseña.Text.Trim())
 
-        ' Crear una instancia del formulario MostrarFamiliar
-        Dim mostrarFamiliarForm As New MostrarFamiliar(ultimoIntegrante)
+            Dim datos As New DataSet
+            adaptador.Fill(datos, "usuarios")
 
-        ' Mostrar el formulario
-        mostrarFamiliarForm.ShowDialog()
+            ' Verificar si las credenciales son correctas
+            If datos.Tables("usuarios").Rows.Count > 0 Then
+                MsgBox("Bienvenido", MsgBoxStyle.Information, "Éxito")
+                Menu.Show()
+            Else
+                MsgBox("Usuario o contraseña incorrectos. Inténtelo de nuevo.", MsgBoxStyle.Critical, "Error")
+            End If
+        Catch ex As Exception
+            MsgBox("Error al ejecutar la consulta: " & ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
     End Sub
 
-    Private Sub IngresarMonto(sender As Object, e As EventArgs) Handles AddMonto.Click
-        ' Verificar si hay integrantes en la lista
-        If integrantes.Count = 0 Then
-            MessageBox.Show("No hay integrantes para asignar un monto.", "Error")
-            Return
+    Private Sub Form1_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        If miConexion.State = ConnectionState.Open Then
+            miConexion.Close()
         End If
-
-        ' Obtener el último integrante agregado (o selecciona uno específico si es necesario)
-        Dim ultimoIntegrante As Integrante = integrantes.Last()
-
-        ' Crear una instancia del formulario AgregarIngresos
-        Dim agregarIngresosForm As New AgregarIngresos(ultimoIntegrante)
-
-        ' Mostrar el formulario
-        agregarIngresosForm.ShowDialog()
     End Sub
 End Class
-

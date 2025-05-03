@@ -1,10 +1,10 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
-    'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
-    Protected Overrides Sub Dispose(disposing As Boolean)
+    'Form reemplaza a Dispose para limpiar la lista de componentes.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
                 components.Dispose()
@@ -14,73 +14,95 @@ Partial Class Form1
         End Try
     End Sub
 
-    'Required by the Windows Form Designer
+    'Requerido por el Diseñador de Windows Forms
     Private components As System.ComponentModel.IContainer
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()>
+    'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
+    'Se puede modificar usando el Diseñador de Windows Forms.  
+    'No lo modifique con el editor de código.
+    <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        AddIntegrante = New Button()
-        ABMGastos = New Button()
-        AddMonto = New Button()
-        Button1 = New Button()
+        Usuario = New Label()
+        txtUsuario = New TextBox()
+        Label1 = New Label()
+        txtContraseña = New TextBox()
+        GroupBox1 = New GroupBox()
+        Log = New Button()
+        GroupBox1.SuspendLayout()
         SuspendLayout()
         ' 
-        ' AddIntegrante
+        ' Usuario
         ' 
-        AddIntegrante.Location = New Point(176, 25)
-        AddIntegrante.Name = "AddIntegrante"
-        AddIntegrante.Size = New Size(346, 78)
-        AddIntegrante.TabIndex = 0
-        AddIntegrante.Text = "Agregar Integrante"
-        AddIntegrante.UseVisualStyleBackColor = True
+        Usuario.AutoSize = True
+        Usuario.Location = New Point(54, 28)
+        Usuario.Name = "Usuario"
+        Usuario.Size = New Size(50, 15)
+        Usuario.TabIndex = 0
+        Usuario.Text = "Usuario:"
         ' 
-        ' ABMGastos
+        ' txtUsuario
         ' 
-        ABMGastos.Location = New Point(176, 119)
-        ABMGastos.Name = "ABMGastos"
-        ABMGastos.Size = New Size(346, 84)
-        ABMGastos.TabIndex = 1
-        ABMGastos.Text = "Modificar Gastos"
-        ABMGastos.UseVisualStyleBackColor = True
+        txtUsuario.Location = New Point(110, 25)
+        txtUsuario.Name = "txtUsuario"
+        txtUsuario.Size = New Size(174, 23)
+        txtUsuario.TabIndex = 1
         ' 
-        ' AddMonto
+        ' Label1
         ' 
-        AddMonto.Location = New Point(176, 221)
-        AddMonto.Name = "AddMonto"
-        AddMonto.Size = New Size(346, 84)
-        AddMonto.TabIndex = 2
-        AddMonto.Text = "Ingresar Monto"
-        AddMonto.UseVisualStyleBackColor = True
+        Label1.AutoSize = True
+        Label1.Location = New Point(34, 57)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(70, 15)
+        Label1.TabIndex = 0
+        Label1.Text = "Contraseña:"
         ' 
-        ' Button1
+        ' txtContraseña
         ' 
-        Button1.Location = New Point(176, 325)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(346, 84)
-        Button1.TabIndex = 3
-        Button1.Text = "Mostrar Integrante"
-        Button1.UseVisualStyleBackColor = True
+        txtContraseña.Location = New Point(110, 54)
+        txtContraseña.Name = "txtContraseña"
+        txtContraseña.Size = New Size(174, 23)
+        txtContraseña.TabIndex = 1
         ' 
-        ' Form1
+        ' GroupBox1
+        ' 
+        GroupBox1.Controls.Add(Log)
+        GroupBox1.Controls.Add(txtContraseña)
+        GroupBox1.Controls.Add(Label1)
+        GroupBox1.Controls.Add(txtUsuario)
+        GroupBox1.Controls.Add(Usuario)
+        GroupBox1.Location = New Point(184, 133)
+        GroupBox1.Name = "GroupBox1"
+        GroupBox1.Size = New Size(375, 143)
+        GroupBox1.TabIndex = 2
+        GroupBox1.TabStop = False
+        GroupBox1.Text = "Login de usuario"
+        ' 
+        ' Log
+        ' 
+        Log.Location = New Point(133, 97)
+        Log.Name = "Log"
+        Log.Size = New Size(100, 29)
+        Log.TabIndex = 2
+        Log.Text = "Iniciar Sesión"
+        Log.UseVisualStyleBackColor = True
+        ' 
+        ' Login
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
-        Controls.Add(Button1)
-        Controls.Add(AddMonto)
-        Controls.Add(ABMGastos)
-        Controls.Add(AddIntegrante)
-        Name = "Form1"
-        Text = "Form1"
+        Controls.Add(GroupBox1)
+        Name = "Login"
+        Text = "Login"
+        GroupBox1.ResumeLayout(False)
+        GroupBox1.PerformLayout()
         ResumeLayout(False)
     End Sub
 
-    Friend WithEvents AddIntegrante As Button
-    Friend WithEvents ABMGastos As Button
-    Friend WithEvents AddMonto As Button
-    Friend WithEvents Button1 As Button
-
+    Friend WithEvents Usuario As Label
+    Friend WithEvents txtUsuario As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtContraseña As TextBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Log As Button
 End Class
