@@ -180,6 +180,7 @@ Public Class abmIntegrantes
         End Try
     End Sub
 
+    'Función para eliminar registros
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
         Try
             ' Verificar que haya una fila seleccionada en el DataGridView
@@ -242,6 +243,7 @@ Public Class abmIntegrantes
         End Try
     End Sub
 
+    'Función para volver al menú
     Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
         Try
             ' Crear una instancia del formulario Menu
