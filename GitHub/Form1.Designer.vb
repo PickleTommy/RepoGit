@@ -22,13 +22,16 @@ Partial Class Form1
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Usuario = New Label()
         txtUsuario = New TextBox()
         Label1 = New Label()
         txtContraseña = New TextBox()
         GroupBox1 = New GroupBox()
         Log = New Button()
+        PictureBox1 = New PictureBox()
         GroupBox1.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Usuario
@@ -70,7 +73,7 @@ Partial Class Form1
         GroupBox1.Controls.Add(Label1)
         GroupBox1.Controls.Add(txtUsuario)
         GroupBox1.Controls.Add(Usuario)
-        GroupBox1.Location = New Point(184, 133)
+        GroupBox1.Location = New Point(206, 305)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Size = New Size(375, 143)
         GroupBox1.TabIndex = 2
@@ -86,16 +89,28 @@ Partial Class Form1
         Log.Text = "Iniciar Sesión"
         Log.UseVisualStyleBackColor = True
         ' 
-        ' Login
+        ' PictureBox1
+        ' 
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(104, 12)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(586, 287)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 3
+        PictureBox1.TabStop = False
+        ' 
+        ' Form1
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(804, 472)
+        Controls.Add(PictureBox1)
         Controls.Add(GroupBox1)
-        Name = "Login"
+        Name = "Form1"
         Text = "Login"
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -105,4 +120,5 @@ Partial Class Form1
     Friend WithEvents txtContraseña As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Log As Button
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

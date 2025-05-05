@@ -36,7 +36,6 @@ Partial Class calculosMonto
         GroupBox1 = New GroupBox()
         btnEditar = New Button()
         btnEliminar = New Button()
-        btnVolver = New Button()
         btnGuardar = New Button()
         btnNuevo = New Button()
         btnCalcular = New Button()
@@ -177,16 +176,6 @@ Partial Class calculosMonto
         btnEliminar.Text = "Eliminar"
         btnEliminar.UseVisualStyleBackColor = True
         ' 
-        ' btnVolver
-        ' 
-        btnVolver.Font = New Font("Segoe UI", 12F)
-        btnVolver.Location = New Point(522, 187)
-        btnVolver.Name = "btnVolver"
-        btnVolver.Size = New Size(120, 57)
-        btnVolver.TabIndex = 9
-        btnVolver.Text = "Volver"
-        btnVolver.UseVisualStyleBackColor = True
-        ' 
         ' btnGuardar
         ' 
         btnGuardar.Font = New Font("Segoe UI", 12F)
@@ -210,7 +199,7 @@ Partial Class calculosMonto
         ' btnCalcular
         ' 
         btnCalcular.Font = New Font("Segoe UI", 12F)
-        btnCalcular.Location = New Point(670, 187)
+        btnCalcular.Location = New Point(599, 193)
         btnCalcular.Name = "btnCalcular"
         btnCalcular.Size = New Size(120, 57)
         btnCalcular.TabIndex = 9
@@ -225,7 +214,6 @@ Partial Class calculosMonto
         Controls.Add(btnEditar)
         Controls.Add(btnEliminar)
         Controls.Add(btnCalcular)
-        Controls.Add(btnVolver)
         Controls.Add(btnGuardar)
         Controls.Add(btnNuevo)
         Controls.Add(DGVcalculos)
@@ -257,7 +245,6 @@ Partial Class calculosMonto
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents btnEditar As Button
     Friend WithEvents btnEliminar As Button
-    Friend WithEvents btnVolver As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnNuevo As Button
     Friend WithEvents btnCalcular As Button

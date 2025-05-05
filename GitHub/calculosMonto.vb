@@ -161,23 +161,6 @@ Public Class calculosMonto
         End Try
     End Sub
 
-
-    ' Función para volver al menú
-    Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
-        Try
-            ' Crear una instancia del formulario Menu
-            Dim menuForm As New Menu()
-
-            ' Mostrar el formulario Menu
-            menuForm.Show()
-
-            ' Cerrar el formulario actual
-            Me.Close()
-        Catch ex As Exception
-            MessageBox.Show("Error al regresar al menú: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
     ' Función para actualizar el DataGridView
     Private Sub ActualizarDataGridView()
         Try
@@ -315,8 +298,13 @@ Public Class calculosMonto
                 porcentajeAhorro = 0 ' Si no es válido, se usará el valor por defecto en CalculosCompartidos
             End If
 
-            ' Realizar los cálculos
-            CalculosCompartidos.RealizarCalculos(percentAhorro)
+            ' Almacenar los cálculos en la clase compartida
+            CalculosCompartidos.TotalIngresos = totalIngresos
+            CalculosCompartidos.MontoAhorro = montoAhorro
+            CalculosCompartidos.IngresosRestantes = ingresosRestantes
+            CalculosCompartidos.TotalBasicos = totalBasicos
+            CalculosCompartidos.TotalDiscrecionales = totalDiscrecionales
+            CalculosCompartidos.TotalExtraordinarios = totalExtraordinarios
 
             ' Mostrar el resultado final
             Dim resultado As String = $"Total Ingresos: {totalIngresos:C2}" & vbCrLf &

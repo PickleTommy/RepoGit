@@ -1,10 +1,4 @@
-﻿Imports iText.Kernel.Pdf
-Imports iText.Kernel.Font
-Imports iText.IO.Font.Constants
-Imports iText.Layout
-Imports iText.Layout.Element
-Imports iText.Layout.Properties
-Imports System.IO
+﻿Imports System.IO
 Public Class Menu
     Private Sub btnIntegrantes_Click(sender As Object, e As EventArgs) Handles btnIntegrantes.Click
         abmIntegrantes.Show()

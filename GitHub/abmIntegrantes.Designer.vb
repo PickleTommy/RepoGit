@@ -32,7 +32,7 @@ Partial Class abmIntegrantes
         tbApellido = New TextBox()
         tbEdad = New TextBox()
         tbRol = New TextBox()
-        TextBox5 = New TextBox()
+        tbBusqueda = New TextBox()
         GroupBox1 = New GroupBox()
         DateTimePicker1 = New DateTimePicker()
         tbDNI = New TextBox()
@@ -41,10 +41,11 @@ Partial Class abmIntegrantes
         btnGuardar = New Button()
         btnEliminar = New Button()
         DGVintegrantes = New DataGridView()
-        btnVolver = New Button()
         btnEditar = New Button()
+        PictureBox1 = New PictureBox()
         GroupBox1.SuspendLayout()
         CType(DGVintegrantes, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Label1
@@ -134,12 +135,13 @@ Partial Class abmIntegrantes
         tbRol.Size = New Size(136, 23)
         tbRol.TabIndex = 1
         ' 
-        ' TextBox5
+        ' tbBusqueda
         ' 
-        TextBox5.Location = New Point(21, 267)
-        TextBox5.Name = "TextBox5"
-        TextBox5.Size = New Size(166, 23)
-        TextBox5.TabIndex = 1
+        tbBusqueda.Font = New Font("Segoe UI", 12F)
+        tbBusqueda.Location = New Point(62, 261)
+        tbBusqueda.Name = "tbBusqueda"
+        tbBusqueda.Size = New Size(166, 29)
+        tbBusqueda.TabIndex = 1
         ' 
         ' GroupBox1
         ' 
@@ -189,7 +191,9 @@ Partial Class abmIntegrantes
         ' btnNuevo
         ' 
         btnNuevo.Font = New Font("Segoe UI", 12F)
-        btnNuevo.Location = New Point(409, 31)
+        btnNuevo.Image = My.Resources.Resources.add
+        btnNuevo.ImageAlign = ContentAlignment.MiddleRight
+        btnNuevo.Location = New Point(435, 81)
         btnNuevo.Name = "btnNuevo"
         btnNuevo.Size = New Size(123, 57)
         btnNuevo.TabIndex = 3
@@ -199,7 +203,9 @@ Partial Class abmIntegrantes
         ' btnGuardar
         ' 
         btnGuardar.Font = New Font("Segoe UI", 12F)
-        btnGuardar.Location = New Point(409, 100)
+        btnGuardar.Image = My.Resources.Resources.save
+        btnGuardar.ImageAlign = ContentAlignment.MiddleRight
+        btnGuardar.Location = New Point(435, 150)
         btnGuardar.Name = "btnGuardar"
         btnGuardar.Size = New Size(123, 57)
         btnGuardar.TabIndex = 3
@@ -209,7 +215,9 @@ Partial Class abmIntegrantes
         ' btnEliminar
         ' 
         btnEliminar.Font = New Font("Segoe UI", 12F)
-        btnEliminar.Location = New Point(560, 31)
+        btnEliminar.Image = My.Resources.Resources.remove
+        btnEliminar.ImageAlign = ContentAlignment.MiddleRight
+        btnEliminar.Location = New Point(586, 81)
         btnEliminar.Name = "btnEliminar"
         btnEliminar.Size = New Size(121, 57)
         btnEliminar.TabIndex = 3
@@ -224,38 +232,40 @@ Partial Class abmIntegrantes
         DGVintegrantes.Size = New Size(732, 255)
         DGVintegrantes.TabIndex = 4
         ' 
-        ' btnVolver
-        ' 
-        btnVolver.Font = New Font("Segoe UI", 12F)
-        btnVolver.Location = New Point(474, 169)
-        btnVolver.Name = "btnVolver"
-        btnVolver.Size = New Size(120, 57)
-        btnVolver.TabIndex = 3
-        btnVolver.Text = "Volver"
-        btnVolver.UseVisualStyleBackColor = True
-        ' 
         ' btnEditar
         ' 
         btnEditar.Font = New Font("Segoe UI", 12F)
-        btnEditar.Location = New Point(561, 102)
+        btnEditar.Image = My.Resources.Resources.edit
+        btnEditar.ImageAlign = ContentAlignment.MiddleRight
+        btnEditar.Location = New Point(587, 152)
         btnEditar.Name = "btnEditar"
         btnEditar.Size = New Size(120, 56)
         btnEditar.TabIndex = 3
         btnEditar.Text = "Editar"
         btnEditar.UseVisualStyleBackColor = True
         ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Image = My.Resources.Resources.find
+        PictureBox1.Location = New Point(21, 257)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(35, 33)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 5
+        PictureBox1.TabStop = False
+        ' 
         ' abmIntegrantes
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(866, 572)
+        Controls.Add(PictureBox1)
         Controls.Add(DGVintegrantes)
         Controls.Add(btnEditar)
         Controls.Add(btnEliminar)
-        Controls.Add(btnVolver)
         Controls.Add(btnGuardar)
         Controls.Add(btnNuevo)
-        Controls.Add(TextBox5)
+        Controls.Add(tbBusqueda)
         Controls.Add(Label6)
         Controls.Add(GroupBox1)
         Name = "abmIntegrantes"
@@ -263,6 +273,7 @@ Partial Class abmIntegrantes
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         CType(DGVintegrantes, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -277,15 +288,15 @@ Partial Class abmIntegrantes
     Friend WithEvents tbApellido As TextBox
     Friend WithEvents tbEdad As TextBox
     Friend WithEvents tbRol As TextBox
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents tbBusqueda As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents btnNuevo As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnEliminar As Button
     Friend WithEvents DGVintegrantes As DataGridView
     Friend WithEvents tbDNI As TextBox
-    Friend WithEvents btnVolver As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents btnEditar As Button
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

@@ -37,4 +37,5 @@ Public Class Form1
             miConexion.Close()
         End If
     End Sub
+
 End Class

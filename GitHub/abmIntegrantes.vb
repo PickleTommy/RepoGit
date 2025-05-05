@@ -254,22 +254,6 @@ Public Class abmIntegrantes
         End Try
     End Sub
 
-    'Función para volver al menú
-    Private Sub btnVolver_Click(sender As Object, e As EventArgs) Handles btnVolver.Click
-        Try
-            ' Crear una instancia del formulario Menu
-            Dim menuForm As New Menu()
-
-            ' Mostrar el formulario Menu
-            menuForm.Show()
-
-            ' Cerrar el formulario actual
-            Me.Close()
-        Catch ex As Exception
-            MessageBox.Show("Error al regresar al menú: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
     'Función para actualizar el DGV
     Private Sub ActualizarDataGridView()
         Try
@@ -283,6 +267,24 @@ Public Class abmIntegrantes
             DGVintegrantes.DataSource = proyectoDS.Tables("Integrantes")
         Catch ex As Exception
             MessageBox.Show("Error al actualizar la tabla: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub tbBusqueda_TextChanged(sender As Object, e As EventArgs) Handles tbBusqueda.TextChanged
+        Try
+            ' Verificar si el DataTable existe
+            If proyectoDS.Tables.Contains("Integrantes") Then
+                ' Crear un DataView a partir del DataTable
+                Dim vista As New DataView(proyectoDS.Tables("Integrantes"))
+
+                ' Aplicar el filtro por el nombre
+                vista.RowFilter = $"nombre LIKE '%{tbBusqueda.Text}%'"
+
+                ' Vincular el DataView filtrado al DataGridView
+                DGVintegrantes.DataSource = vista
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error al filtrar los datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 End Class

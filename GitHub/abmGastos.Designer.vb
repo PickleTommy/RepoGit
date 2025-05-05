@@ -25,10 +25,9 @@ Partial Class abmGastos
         DGVgastos = New DataGridView()
         btnEditar = New Button()
         btnEliminar = New Button()
-        btnVolver = New Button()
         btnGuardar = New Button()
         btnNuevo = New Button()
-        TextBox5 = New TextBox()
+        tbGastos = New TextBox()
         Label6 = New Label()
         GroupBox1 = New GroupBox()
         DateTimePicker1 = New DateTimePicker()
@@ -45,8 +44,10 @@ Partial Class abmGastos
         Label2 = New Label()
         Label3 = New Label()
         Label4 = New Label()
+        PictureBox1 = New PictureBox()
         CType(DGVgastos, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' DGVgastos
@@ -60,7 +61,9 @@ Partial Class abmGastos
         ' btnEditar
         ' 
         btnEditar.Font = New Font("Segoe UI", 12F)
-        btnEditar.Location = New Point(577, 92)
+        btnEditar.Image = My.Resources.Resources.edit
+        btnEditar.ImageAlign = ContentAlignment.MiddleRight
+        btnEditar.Location = New Point(602, 139)
         btnEditar.Name = "btnEditar"
         btnEditar.Size = New Size(120, 56)
         btnEditar.TabIndex = 8
@@ -70,27 +73,21 @@ Partial Class abmGastos
         ' btnEliminar
         ' 
         btnEliminar.Font = New Font("Segoe UI", 12F)
-        btnEliminar.Location = New Point(576, 21)
+        btnEliminar.Image = My.Resources.Resources.remove
+        btnEliminar.ImageAlign = ContentAlignment.MiddleRight
+        btnEliminar.Location = New Point(601, 68)
         btnEliminar.Name = "btnEliminar"
         btnEliminar.Size = New Size(121, 57)
         btnEliminar.TabIndex = 9
         btnEliminar.Text = "Eliminar"
         btnEliminar.UseVisualStyleBackColor = True
         ' 
-        ' btnVolver
-        ' 
-        btnVolver.Font = New Font("Segoe UI", 12F)
-        btnVolver.Location = New Point(490, 159)
-        btnVolver.Name = "btnVolver"
-        btnVolver.Size = New Size(120, 57)
-        btnVolver.TabIndex = 10
-        btnVolver.Text = "Volver"
-        btnVolver.UseVisualStyleBackColor = True
-        ' 
         ' btnGuardar
         ' 
         btnGuardar.Font = New Font("Segoe UI", 12F)
-        btnGuardar.Location = New Point(425, 90)
+        btnGuardar.Image = My.Resources.Resources.save
+        btnGuardar.ImageAlign = ContentAlignment.MiddleRight
+        btnGuardar.Location = New Point(450, 137)
         btnGuardar.Name = "btnGuardar"
         btnGuardar.Size = New Size(123, 57)
         btnGuardar.TabIndex = 11
@@ -100,19 +97,21 @@ Partial Class abmGastos
         ' btnNuevo
         ' 
         btnNuevo.Font = New Font("Segoe UI", 12F)
-        btnNuevo.Location = New Point(425, 21)
+        btnNuevo.Image = My.Resources.Resources.add
+        btnNuevo.ImageAlign = ContentAlignment.MiddleRight
+        btnNuevo.Location = New Point(450, 68)
         btnNuevo.Name = "btnNuevo"
         btnNuevo.Size = New Size(123, 57)
         btnNuevo.TabIndex = 12
         btnNuevo.Text = "Nuevo"
         btnNuevo.UseVisualStyleBackColor = True
         ' 
-        ' TextBox5
+        ' tbGastos
         ' 
-        TextBox5.Location = New Point(37, 257)
-        TextBox5.Name = "TextBox5"
-        TextBox5.Size = New Size(166, 23)
-        TextBox5.TabIndex = 6
+        tbGastos.Location = New Point(58, 257)
+        tbGastos.Name = "tbGastos"
+        tbGastos.Size = New Size(166, 23)
+        tbGastos.TabIndex = 6
         ' 
         ' Label6
         ' 
@@ -265,18 +264,28 @@ Partial Class abmGastos
         Label4.TabIndex = 0
         Label4.Text = "Tipo de Gasto:"
         ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Image = My.Resources.Resources.find
+        PictureBox1.Location = New Point(22, 258)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(30, 22)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 14
+        PictureBox1.TabStop = False
+        ' 
         ' abmGastos
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(864, 550)
+        Controls.Add(PictureBox1)
         Controls.Add(DGVgastos)
         Controls.Add(btnEditar)
         Controls.Add(btnEliminar)
-        Controls.Add(btnVolver)
         Controls.Add(btnGuardar)
         Controls.Add(btnNuevo)
-        Controls.Add(TextBox5)
+        Controls.Add(tbGastos)
         Controls.Add(Label6)
         Controls.Add(GroupBox1)
         Name = "abmGastos"
@@ -284,6 +293,7 @@ Partial Class abmGastos
         CType(DGVgastos, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -291,10 +301,9 @@ Partial Class abmGastos
     Friend WithEvents DGVgastos As DataGridView
     Friend WithEvents btnEditar As Button
     Friend WithEvents btnEliminar As Button
-    Friend WithEvents btnVolver As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnNuevo As Button
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents tbGastos As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents DateTimePicker1 As DateTimePicker
@@ -311,4 +320,5 @@ Partial Class abmGastos
     Friend WithEvents Label4 As Label
     Friend WithEvents tbIntegrante As TextBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents PictureBox1 As PictureBox
 End Class
