@@ -247,6 +247,9 @@ Public Class abmIntegrantes
             ' Habilitar las TextBox para la edición
             DesbloquearTextBox()
 
+            ' Actualizar el DataGridView
+            ActualizarDataGridView()
+
             ' Indicar que no es un nuevo registro
             esNuevo = False
         Catch ex As Exception

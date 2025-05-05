@@ -61,8 +61,10 @@ Partial Class Form1
         ' 
         ' txtContraseña
         ' 
+        txtContraseña.HideSelection = False
         txtContraseña.Location = New Point(110, 54)
         txtContraseña.Name = "txtContraseña"
+        txtContraseña.PasswordChar = "*"c
         txtContraseña.Size = New Size(174, 23)
         txtContraseña.TabIndex = 1
         ' 
