@@ -6,7 +6,9 @@ Public Class abmIntegrantes
     Private integrantesDA As MySqlDataAdapter
     Private proyectoDS As DataSet
     Private esNuevo As Boolean
+    Private dniSeleccionado As String ' Variable para almacenar el DNI del registro seleccionado
 
+    'Iniciamos la conexión apenas abrimos el formulario
     Private Sub abmIntegrantes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Uso opcional del try en caso de que la conexión falle o no se pueda establecer
         Try
@@ -31,54 +33,55 @@ Public Class abmIntegrantes
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
-            'Verificamos que los campos estén completos
+            ' Verificamos que los campos estén completos
             If Not ValidarCampos() Then Return
+
             ' Verificar si la conexión está abierta, y si no, la abrimos
             If miConexion.State = ConnectionState.Closed Then
                 miConexion.Open()
             End If
 
-            ' Verificar si el registro ya existe en la base de datos
-            Dim consultaExiste As String = "SELECT COUNT(*) FROM integrantes WHERE dni = @dni"
-            Dim comandoExiste As New MySqlCommand(consultaExiste, miConexion)
-            comandoExiste.Parameters.AddWithValue("@dni", tbDNI.Text)
-
-            Dim existe As Integer = Convert.ToInt32(comandoExiste.ExecuteScalar())
-            If existe > 0 Then
-                MessageBox.Show("El registro con el DNI ingresado ya existe.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
-
             If esNuevo Then
                 ' Código para guardar un nuevo registro
-                'Comando SQL para insertar un nuevo registro
                 Dim cmd As String = "INSERT INTO integrantes (dni, nombre, apellido, edad, rol, nacimiento) VALUES (@dni, @nom, @ape, @ed, @rol, @nac)"
                 Dim comandoInsertar As New MySqlCommand(cmd, miConexion)
-                'Parametrizamos el comando
                 comandoInsertar.Parameters.AddWithValue("@dni", tbDNI.Text)
                 comandoInsertar.Parameters.AddWithValue("@nom", tbNombre.Text)
                 comandoInsertar.Parameters.AddWithValue("@ape", tbApellido.Text)
                 comandoInsertar.Parameters.AddWithValue("@ed", Integer.Parse(tbEdad.Text))
                 comandoInsertar.Parameters.AddWithValue("@rol", tbRol.Text)
                 comandoInsertar.Parameters.AddWithValue("@nac", DateTimePicker1.Value)
-                ' Ejecutar el comando
                 comandoInsertar.ExecuteNonQuery()
-                ' Actualizar el DataSet y el DataGridView
                 esNuevo = False
             Else
                 ' Código para actualizar un registro existente
-                'Comando SQL para actualizar un registro existente
-                Dim cmd As String = "UPDATE integrantes SET nombre = @nom, apellido = @ape, edad = @ed, rol = @rol, nacimiento = @nac WHERE dni = @dni"
+                ' Verificar si el DNI ha cambiado
+                If dniSeleccionado <> tbDNI.Text Then
+                    ' Verificar si el nuevo DNI ya existe en la base de datos
+                    Dim consultaExiste As String = "SELECT COUNT(*) FROM integrantes WHERE dni = @dni"
+                    Dim comandoExiste As New MySqlCommand(consultaExiste, miConexion)
+                    comandoExiste.Parameters.AddWithValue("@dni", tbDNI.Text)
+                    Dim existe As Integer = Convert.ToInt32(comandoExiste.ExecuteScalar())
+                    If existe > 0 Then
+                        MessageBox.Show("El nuevo DNI ingresado ya existe.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return
+                    End If
+                End If
+
+                ' Actualizar el registro en la base de datos
+                Dim cmd As String = "UPDATE integrantes SET dni = @dni, nombre = @nom, apellido = @ape, edad = @ed, rol = @rol, nacimiento = @nac WHERE dni = @dniSeleccionado"
                 Dim comandoActualizar As New MySqlCommand(cmd, miConexion)
-                'Parametrizamos el comando
                 comandoActualizar.Parameters.AddWithValue("@dni", tbDNI.Text)
                 comandoActualizar.Parameters.AddWithValue("@nom", tbNombre.Text)
                 comandoActualizar.Parameters.AddWithValue("@ape", tbApellido.Text)
                 comandoActualizar.Parameters.AddWithValue("@ed", Integer.Parse(tbEdad.Text))
                 comandoActualizar.Parameters.AddWithValue("@rol", tbRol.Text)
                 comandoActualizar.Parameters.AddWithValue("@nac", DateTimePicker1.Value)
-                ' Ejecutar el comando
+                comandoActualizar.Parameters.AddWithValue("@dniSeleccionado", dniSeleccionado)
                 comandoActualizar.ExecuteNonQuery()
+
+                ' Actualizar el DNI seleccionado
+                dniSeleccionado = tbDNI.Text
             End If
 
             ' Actualizar el DataGridView
@@ -87,15 +90,14 @@ Public Class abmIntegrantes
             MessageBox.Show("Operación realizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
             BloquearTextBox()
         Catch ex As Exception
-            ' En caso de error, mostramos un mensaje
             MessageBox.Show("Error al guardar el registro: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            ' Aseguramos que la conexión se cierre
             If miConexion.State = ConnectionState.Open Then
                 miConexion.Close()
             End If
         End Try
     End Sub
+
 
     'Funcion que bloquea las textbox
     Private Sub BloquearTextBox()
@@ -153,8 +155,14 @@ Public Class abmIntegrantes
             Return False
         End If
 
+        If DateTimePicker1.Value > DateTime.Now Then
+            MessageBox.Show("La fecha de nacimiento no puede ser una fecha futura.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+
         Return True
     End Function
+
     'Evento para seleccionar las celdas al clickearlas en el DGV y cargar los datos en las textbox
     Private Sub DGVintegrantes_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVintegrantes.CellClick
         Try
@@ -232,6 +240,9 @@ Public Class abmIntegrantes
                 MessageBox.Show("Por favor, seleccione un registro del DataGridView antes de editar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return
             End If
+
+            ' Guardar el DNI del registro seleccionado
+            dniSeleccionado = tbDNI.Text
 
             ' Habilitar las TextBox para la edición
             DesbloquearTextBox()

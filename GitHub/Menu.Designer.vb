@@ -24,8 +24,8 @@ Partial Class Menu
     Private Sub InitializeComponent()
         AddMonto = New Button()
         btnIntegrantes = New Button()
-        Button2 = New Button()
-        Button3 = New Button()
+        btnGastos = New Button()
+        Resumen = New Button()
         SuspendLayout()
         ' 
         ' AddMonto
@@ -46,23 +46,23 @@ Partial Class Menu
         btnIntegrantes.Text = "Integrantes"
         btnIntegrantes.UseVisualStyleBackColor = True
         ' 
-        ' Button2
+        ' btnGastos
         ' 
-        Button2.Location = New Point(243, 235)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(267, 78)
-        Button2.TabIndex = 2
-        Button2.Text = "Gastos"
-        Button2.UseVisualStyleBackColor = True
+        btnGastos.Location = New Point(243, 235)
+        btnGastos.Name = "btnGastos"
+        btnGastos.Size = New Size(267, 78)
+        btnGastos.TabIndex = 2
+        btnGastos.Text = "Gastos"
+        btnGastos.UseVisualStyleBackColor = True
         ' 
-        ' Button3
+        ' Resumen
         ' 
-        Button3.Location = New Point(243, 335)
-        Button3.Name = "Button3"
-        Button3.Size = New Size(267, 78)
-        Button3.TabIndex = 2
-        Button3.Text = "Resúmen"
-        Button3.UseVisualStyleBackColor = True
+        Resumen.Location = New Point(243, 335)
+        Resumen.Name = "Resumen"
+        Resumen.Size = New Size(267, 78)
+        Resumen.TabIndex = 2
+        Resumen.Text = "Resúmen"
+        Resumen.UseVisualStyleBackColor = True
         ' 
         ' Menu
         ' 
@@ -70,8 +70,8 @@ Partial Class Menu
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(btnIntegrantes)
-        Controls.Add(Button3)
-        Controls.Add(Button2)
+        Controls.Add(Resumen)
+        Controls.Add(btnGastos)
         Controls.Add(AddMonto)
         Name = "Menu"
         Text = "Form1"
@@ -79,7 +79,7 @@ Partial Class Menu
     End Sub
     Friend WithEvents AddMonto As Button
     Friend WithEvents btnIntegrantes As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnGastos As Button
+    Friend WithEvents Resumen As Button
 
 End Class
