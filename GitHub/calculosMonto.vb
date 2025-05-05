@@ -35,66 +35,49 @@ Public Class calculosMonto
     ' Función para guardar un nuevo registro o actualizar uno existente
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
         Try
+            ' Verificar que los campos estén completos
+            If Not ValidarCampos() Then Return
+
             ' Verificar si la conexión está abierta, y si no, la abrimos
             If miConexion.State = ConnectionState.Closed Then
                 miConexion.Open()
             End If
 
-            ' Obtener el monto total de ingresos
-            Dim cmdIngresos As String = "SELECT SUM(monto) FROM ingresos"
-            Dim comandoIngresos As New MySqlCommand(cmdIngresos, miConexion)
-            Dim totalIngresos As Decimal = If(IsDBNull(comandoIngresos.ExecuteScalar()), 0, Convert.ToDecimal(comandoIngresos.ExecuteScalar()))
+            If esNuevo Then
+                ' Código para guardar un nuevo registro
+                Dim cmd As String = "INSERT INTO ingresos (idintegrante, monto, fuente, fecha) VALUES (@idint, @mon, @font, @date)"
+                Dim comandoInsertar As New MySqlCommand(cmd, miConexion)
+                comandoInsertar.Parameters.AddWithValue("@idint", Integer.Parse(tbIntegrante.Text))
+                comandoInsertar.Parameters.AddWithValue("@mon", Decimal.Parse(tbMonto.Text))
+                comandoInsertar.Parameters.AddWithValue("@font", tbFuente.Text)
+                comandoInsertar.Parameters.AddWithValue("@date", DateTimePicker1.Value)
+                comandoInsertar.ExecuteNonQuery()
+                esNuevo = False
+            Else
+                ' Código para actualizar un registro existente
+                Dim cmd As String = "UPDATE ingresos SET idintegrante = @idint, monto = @mon, fuente = @font, fecha = @date WHERE idingreso = @idSeleccionado"
+                Dim comandoActualizar As New MySqlCommand(cmd, miConexion)
+                comandoActualizar.Parameters.AddWithValue("@idint", Integer.Parse(tbIntegrante.Text))
+                comandoActualizar.Parameters.AddWithValue("@mon", Decimal.Parse(tbMonto.Text))
+                comandoActualizar.Parameters.AddWithValue("@font", tbFuente.Text)
+                comandoActualizar.Parameters.AddWithValue("@date", DateTimePicker1.Value)
+                comandoActualizar.Parameters.AddWithValue("@idSeleccionado", idSeleccionado)
+                comandoActualizar.ExecuteNonQuery()
+            End If
 
-            ' Restar el porcentaje de ahorro
-            Dim porcentajeAhorro As Decimal = If(String.IsNullOrWhiteSpace(tbPorcentajeAhorro.Text), 0.2D, Decimal.Parse(tbPorcentajeAhorro.Text) / 100)
-            Dim montoAhorro As Decimal = totalIngresos * porcentajeAhorro
-            Dim ingresosRestantes As Decimal = totalIngresos - montoAhorro
+            ' Actualizar el DataGridView
+            ActualizarDataGridView()
 
-            ' Obtener los gastos básicos
-            Dim cmdBasicos As String = "SELECT SUM(monto) FROM gastos WHERE tipo_gasto = 'basico'"
-            Dim comandoBasicos As New MySqlCommand(cmdBasicos, miConexion)
-            Dim totalBasicos As Decimal = If(IsDBNull(comandoBasicos.ExecuteScalar()), 0, Convert.ToDecimal(comandoBasicos.ExecuteScalar()))
-            ingresosRestantes -= totalBasicos
-
-            ' Obtener los gastos discrecionales
-            Dim cmdDiscrecionales As String = "SELECT SUM(monto) FROM gastos WHERE tipo_gasto = 'discrecional'"
-            Dim comandoDiscrecionales As New MySqlCommand(cmdDiscrecionales, miConexion)
-            Dim totalDiscrecionales As Decimal = If(IsDBNull(comandoDiscrecionales.ExecuteScalar()), 0, Convert.ToDecimal(comandoDiscrecionales.ExecuteScalar()))
-            ingresosRestantes -= totalDiscrecionales
-
-            ' Obtener los gastos extraordinarios
-            Dim cmdExtraordinarios As String = "SELECT SUM(monto) FROM gastos WHERE tipo_gasto = 'extraordinario'"
-            Dim comandoExtraordinarios As New MySqlCommand(cmdExtraordinarios, miConexion)
-            Dim totalExtraordinarios As Decimal = If(IsDBNull(comandoExtraordinarios.ExecuteScalar()), 0, Convert.ToDecimal(comandoExtraordinarios.ExecuteScalar()))
-            ingresosRestantes -= totalExtraordinarios
-
-            ' Almacenar los cálculos en la clase compartida
-            CalculosCompartidos.TotalIngresos = totalIngresos
-            CalculosCompartidos.MontoAhorro = montoAhorro
-            CalculosCompartidos.IngresosRestantes = ingresosRestantes
-            CalculosCompartidos.TotalBasicos = totalBasicos
-            CalculosCompartidos.TotalDiscrecionales = totalDiscrecionales
-            CalculosCompartidos.TotalExtraordinarios = totalExtraordinarios
-
-            ' Mostrar el resultado final
-            Dim resultado As String = $"Total Ingresos: {totalIngresos:C2}" & vbCrLf &
-                                   $"Ahorro ({porcentajeAhorro * 100}%): {montoAhorro:C2}" & vbCrLf &
-                                   $"Gastos Básicos: {totalBasicos:C2}" & vbCrLf &
-                                   $"Gastos Discrecionales: {totalDiscrecionales:C2}" & vbCrLf &
-                                   $"Gastos Extraordinarios: {totalExtraordinarios:C2}" & vbCrLf &
-                                   $"Ingresos Disponibles: {ingresosRestantes:C2}"
-
-            MessageBox.Show(resultado, "Cálculos Realizados", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Operación realizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            BloquearTextBox()
         Catch ex As Exception
-            MessageBox.Show("Error al calcular los ingresos disponibles: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error al guardar el registro: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            ' Asegurarse de cerrar la conexión
             If miConexion.State = ConnectionState.Open Then
                 miConexion.Close()
             End If
         End Try
     End Sub
-
 
 
     ' Función para eliminar registros
@@ -228,7 +211,6 @@ Public Class calculosMonto
 
         Return True
     End Function
-
 
     ' Evento para seleccionar las celdas al hacer clic en el DataGridView
     Private Sub DGVcalculos_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVcalculos.CellClick
