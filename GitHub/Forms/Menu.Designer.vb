@@ -22,23 +22,25 @@ Partial Class Menu
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        AddMonto = New Button()
+        btnIngresos = New Button()
         btnIntegrantes = New Button()
         btnGastos = New Button()
-        Resumen = New Button()
+        Calcular = New Button()
         SuspendLayout()
         ' 
-        ' AddMonto
+        ' btnIngresos
         ' 
-        AddMonto.Location = New Point(243, 137)
-        AddMonto.Name = "AddMonto"
-        AddMonto.Size = New Size(267, 78)
-        AddMonto.TabIndex = 2
-        AddMonto.Text = "Ingresar Monto"
-        AddMonto.UseVisualStyleBackColor = True
+        btnIngresos.Font = New Font("Segoe UI", 12F)
+        btnIngresos.Location = New Point(243, 137)
+        btnIngresos.Name = "btnIngresos"
+        btnIngresos.Size = New Size(267, 78)
+        btnIngresos.TabIndex = 2
+        btnIngresos.Text = "Monto"
+        btnIngresos.UseVisualStyleBackColor = True
         ' 
         ' btnIntegrantes
         ' 
+        btnIntegrantes.Font = New Font("Segoe UI", 12F)
         btnIntegrantes.Location = New Point(243, 34)
         btnIntegrantes.Name = "btnIntegrantes"
         btnIntegrantes.Size = New Size(267, 78)
@@ -48,6 +50,7 @@ Partial Class Menu
         ' 
         ' btnGastos
         ' 
+        btnGastos.Font = New Font("Segoe UI", 12F)
         btnGastos.Location = New Point(243, 235)
         btnGastos.Name = "btnGastos"
         btnGastos.Size = New Size(267, 78)
@@ -55,14 +58,15 @@ Partial Class Menu
         btnGastos.Text = "Gastos"
         btnGastos.UseVisualStyleBackColor = True
         ' 
-        ' Resumen
+        ' Calcular
         ' 
-        Resumen.Location = New Point(243, 335)
-        Resumen.Name = "Resumen"
-        Resumen.Size = New Size(267, 78)
-        Resumen.TabIndex = 2
-        Resumen.Text = "Resúmen"
-        Resumen.UseVisualStyleBackColor = True
+        Calcular.Font = New Font("Segoe UI", 12F)
+        Calcular.Location = New Point(243, 335)
+        Calcular.Name = "Calcular"
+        Calcular.Size = New Size(267, 78)
+        Calcular.TabIndex = 2
+        Calcular.Text = "Cálculos"
+        Calcular.UseVisualStyleBackColor = True
         ' 
         ' Menu
         ' 
@@ -70,16 +74,16 @@ Partial Class Menu
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(btnIntegrantes)
-        Controls.Add(Resumen)
+        Controls.Add(Calcular)
         Controls.Add(btnGastos)
-        Controls.Add(AddMonto)
+        Controls.Add(btnIngresos)
         Name = "Menu"
         Text = "Form1"
         ResumeLayout(False)
     End Sub
-    Friend WithEvents AddMonto As Button
+    Friend WithEvents btnIngresos As Button
     Friend WithEvents btnIntegrantes As Button
     Friend WithEvents btnGastos As Button
-    Friend WithEvents Resumen As Button
+    Friend WithEvents Calcular As Button
 
 End Class

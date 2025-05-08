@@ -14,18 +14,30 @@ Public Class abmIntegrantes
         Try
             'Iniciamos la conexión a la BD
             miConexion = New MySqlConnection("Server=LocalHost;Uid=root;Pwd=;database=bdproyectoprog")
+
             'Creamos el DataAdapter para la tabla Integrantes
             'En este caso primero definimos el DataAdapter y luego el comando, pero se puede hacer en el mismo renglón
             integrantesDA = New MySqlDataAdapter()
             integrantesDA.SelectCommand = New MySqlCommand("SELECT * FROM integrantes", miConexion)
+
             'Lo creamos igual que al DataAdapter y llenamos la tabla
             proyectoDS = New DataSet()
             proyectoDS.Tables.Add("Integrantes")
             integrantesDA.Fill(proyectoDS.Tables("Integrantes"))
+
             'Vinculamos el DataGridView
             DGVintegrantes.DataSource = proyectoDS.Tables("Integrantes")
+
             'Bloqueamos las TextBox con la siguiente funcion
             BloquearTextBox()
+
+            ' Verificar el rol del usuario actual
+            If Form1.UsuarioActual.Rol.ToLower() = "no tutor" Then
+                btnNuevo.Enabled = False
+                btnEliminar.Enabled = False
+                btnEditar.Enabled = False
+                btnGuardar.Enabled = False
+            End If
         Catch ex As Exception
             MessageBox.Show("Error al conectar con la base de datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try

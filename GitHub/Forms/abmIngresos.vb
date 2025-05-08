@@ -1,9 +1,9 @@
 ﻿Imports MySql.Data.MySqlClient
-Public Class calculosMonto
+Public Class abmIngresos
     ' Variables para la conexión, el DataAdapter y el DataSet
     Private miConexion As MySqlConnection
-    Private calculosDA As MySqlDataAdapter
-    Private calculosDS As DataSet
+    Private ingresosDA As MySqlDataAdapter
+    Private ingresosDS As DataSet
     Private esNuevo As Boolean
     Private idSeleccionado As Integer ' Variable para almacenar el idingreso del registro seleccionado
 
@@ -13,19 +13,27 @@ Public Class calculosMonto
             miConexion = New MySqlConnection("Server=LocalHost;Uid=root;Pwd=;database=bdproyectoprog")
 
             ' Creamos el DataAdapter para la tabla Ingresos
-            calculosDA = New MySqlDataAdapter()
-            calculosDA.SelectCommand = New MySqlCommand("SELECT * FROM ingresos", miConexion)
+            ingresosDA = New MySqlDataAdapter()
+            ingresosDA.SelectCommand = New MySqlCommand("SELECT * FROM ingresos", miConexion)
 
             ' Creamos el DataSet y llenamos la tabla
-            calculosDS = New DataSet()
-            calculosDS.Tables.Add("Ingresos")
-            calculosDA.Fill(calculosDS.Tables("Ingresos"))
+            ingresosDS = New DataSet()
+            ingresosDS.Tables.Add("Ingresos")
+            ingresosDA.Fill(ingresosDS.Tables("Ingresos"))
 
             ' Vinculamos el DataGridView
-            DGVcalculos.DataSource = calculosDS.Tables("Ingresos")
+            DGVcalculos.DataSource = ingresosDS.Tables("Ingresos")
 
             ' Bloqueamos las TextBox con la siguiente función
             BloquearTextBox()
+
+            ' Verificar el rol del usuario actual
+            If Form1.UsuarioActual.Rol.ToLower() = "no tutor" Then
+                btnNuevo.Enabled = False
+                btnEliminar.Enabled = False
+                btnEditar.Enabled = False
+                btnGuardar.Enabled = False
+            End If
         Catch ex As Exception
             MessageBox.Show("Error al conectar con la base de datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -148,20 +156,19 @@ Public Class calculosMonto
     Private Sub ActualizarDataGridView()
         Try
             ' Limpiar la tabla del DataSet
-            If calculosDS.Tables.Contains("Ingresos") Then
-                calculosDS.Tables("Ingresos").Clear()
+            If ingresosDS.Tables.Contains("Ingresos") Then
+                ingresosDS.Tables("Ingresos").Clear()
             End If
 
             ' Rellenar la tabla con los datos actualizados desde la base de datos
-            calculosDA.Fill(calculosDS.Tables("Ingresos"))
+            ingresosDA.Fill(ingresosDS.Tables("Ingresos"))
 
             ' Vincular el DataGridView al DataSet actualizado
-            DGVcalculos.DataSource = calculosDS.Tables("Ingresos")
+            DGVcalculos.DataSource = ingresosDS.Tables("Ingresos")
         Catch ex As MySqlException
             MessageBox.Show("Error al actualizar la tabla: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
 
     ' Función para bloquear las TextBox
     Private Sub BloquearTextBox()
@@ -239,39 +246,39 @@ Public Class calculosMonto
     End Sub
 
     ' Lógica de cálculo de gastos
-    Private Sub btnCalcular_Click(sender As Object, e As EventArgs) Handles btnCalcular.Click
+    Private Sub btnCalcular_Click(sender As Object, e As EventArgs)
         Try
             ' Verificar si la conexión está abierta, y si no, la abrimos
             If miConexion.State = ConnectionState.Closed Then
-                miConexion.Open()
+                miConexion.Open
             End If
 
             ' Obtener el monto total de ingresos
-            Dim cmdIngresos As String = "SELECT SUM(monto) FROM ingresos"
+            Dim cmdIngresos = "SELECT SUM(monto) FROM ingresos"
             Dim comandoIngresos As New MySqlCommand(cmdIngresos, miConexion)
-            Dim totalIngresos As Decimal = If(IsDBNull(comandoIngresos.ExecuteScalar()), 0, Convert.ToDecimal(comandoIngresos.ExecuteScalar()))
+            Dim totalIngresos = If(IsDBNull(comandoIngresos.ExecuteScalar), 0, Convert.ToDecimal(comandoIngresos.ExecuteScalar))
 
             ' Restar el porcentaje de ahorro
-            Dim porcentajeAhorro As Decimal = If(String.IsNullOrWhiteSpace(tbPorcentajeAhorro.Text), 0.2D, Decimal.Parse(tbPorcentajeAhorro.Text) / 100)
-            Dim montoAhorro As Decimal = totalIngresos * porcentajeAhorro
-            Dim ingresosRestantes As Decimal = totalIngresos - montoAhorro
+            Dim porcentajeAhorro = If(String.IsNullOrWhiteSpace(tbPorcentajeAhorro.Text), 0.2D, Decimal.Parse(tbPorcentajeAhorro.Text) / 100)
+            Dim montoAhorro = totalIngresos * porcentajeAhorro
+            Dim ingresosRestantes = totalIngresos - montoAhorro
 
             ' Obtener los gastos básicos
-            Dim cmdBasicos As String = "SELECT SUM(monto) FROM gastos WHERE tipo_gasto = 'basico'"
+            Dim cmdBasicos = "SELECT SUM(monto) FROM gastos WHERE tipo_gasto = 'basico'"
             Dim comandoBasicos As New MySqlCommand(cmdBasicos, miConexion)
-            Dim totalBasicos As Decimal = If(IsDBNull(comandoBasicos.ExecuteScalar()), 0, Convert.ToDecimal(comandoBasicos.ExecuteScalar()))
+            Dim totalBasicos = If(IsDBNull(comandoBasicos.ExecuteScalar), 0, Convert.ToDecimal(comandoBasicos.ExecuteScalar))
             ingresosRestantes -= totalBasicos
 
             ' Obtener los gastos discrecionales
-            Dim cmdDiscrecionales As String = "SELECT SUM(monto) FROM gastos WHERE tipo_gasto = 'discrecional'"
+            Dim cmdDiscrecionales = "SELECT SUM(monto) FROM gastos WHERE tipo_gasto = 'discrecional'"
             Dim comandoDiscrecionales As New MySqlCommand(cmdDiscrecionales, miConexion)
-            Dim totalDiscrecionales As Decimal = If(IsDBNull(comandoDiscrecionales.ExecuteScalar()), 0, Convert.ToDecimal(comandoDiscrecionales.ExecuteScalar()))
+            Dim totalDiscrecionales = If(IsDBNull(comandoDiscrecionales.ExecuteScalar), 0, Convert.ToDecimal(comandoDiscrecionales.ExecuteScalar))
             ingresosRestantes -= totalDiscrecionales
 
             ' Obtener los gastos extraordinarios
-            Dim cmdExtraordinarios As String = "SELECT SUM(monto) FROM gastos WHERE tipo_gasto = 'extraordinario'"
+            Dim cmdExtraordinarios = "SELECT SUM(monto) FROM gastos WHERE tipo_gasto = 'extraordinario'"
             Dim comandoExtraordinarios As New MySqlCommand(cmdExtraordinarios, miConexion)
-            Dim totalExtraordinarios As Decimal = If(IsDBNull(comandoExtraordinarios.ExecuteScalar()), 0, Convert.ToDecimal(comandoExtraordinarios.ExecuteScalar()))
+            Dim totalExtraordinarios = If(IsDBNull(comandoExtraordinarios.ExecuteScalar), 0, Convert.ToDecimal(comandoExtraordinarios.ExecuteScalar))
             ingresosRestantes -= totalExtraordinarios
 
             ' Obtener el porcentaje de ahorro ingresado por el usuario
@@ -289,7 +296,7 @@ Public Class calculosMonto
             CalculosCompartidos.TotalExtraordinarios = totalExtraordinarios
 
             ' Mostrar el resultado final
-            Dim resultado As String = $"Total Ingresos: {totalIngresos:C2}" & vbCrLf &
+            Dim resultado = $"Total Ingresos: {totalIngresos:C2}" & vbCrLf &
                                        $"Ahorro ({porcentajeAhorro * 100}%): {montoAhorro:C2}" & vbCrLf &
                                        $"Gastos Básicos: {totalBasicos:C2}" & vbCrLf &
                                        $"Gastos Discrecionales: {totalDiscrecionales:C2}" & vbCrLf &
@@ -302,7 +309,7 @@ Public Class calculosMonto
         Finally
             ' Asegurarse de cerrar la conexión
             If miConexion.State = ConnectionState.Open Then
-                miConexion.Close()
+                miConexion.Close
             End If
         End Try
     End Sub

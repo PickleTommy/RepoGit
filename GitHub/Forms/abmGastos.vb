@@ -1,4 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
+﻿
+Imports MySql.Data.MySqlClient
 Public Class abmGastos
     'Variables para la conexión, el DataAdapter y el DataSet
     Private miConexion As MySqlConnection
@@ -8,24 +9,40 @@ Public Class abmGastos
     Private idgastoSeleccionado As Integer ' Variable para almacenar el idgasto seleccionado
 
     Private Sub abmGastos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Uso opcional del try en caso de que la conexión falle o no se pueda establecer
         Try
-            'Iniciamos la conexión a la BD
+            ' Conexión existente a la tabla 'gastos'
             miConexion = New MySqlConnection("Server=LocalHost;Uid=root;Pwd=;database=bdproyectoprog")
-            'Creamos el DataAdapter para la tabla Gastos
             gastosDA = New MySqlDataAdapter()
             gastosDA.SelectCommand = New MySqlCommand("SELECT * FROM gastos", miConexion)
-            'Lo creamos igual que al DataAdapter y llenamos la tabla
             proyectoDS = New DataSet()
             proyectoDS.Tables.Add("Gastos")
             gastosDA.Fill(proyectoDS.Tables("Gastos"))
-            'Vinculamos el DataGridView
             DGVgastos.DataSource = proyectoDS.Tables("Gastos")
-            'Bloqueamos las TextBox con la siguiente funcion
+
+            ' Bloquear las TextBox
             BloquearTextBox()
+
+            ' Verificar el rol del usuario actual
+            If Form1.UsuarioActual.Rol.ToLower() = "no tutor" Then
+                btnNuevo.Enabled = False
+                btnEliminar.Enabled = False
+                btnEditar.Enabled = False
+                btnGuardar.Enabled = False
+            End If
         Catch ex As Exception
-            MessageBox.Show("Error al conectar con la base de datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error al conectar con las bases de datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+
+    'Funcion del botón Nuevo
+    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
+        'Desbloqueamos las textbox
+        DesbloquearTextBox()
+        'Limpiamos las textbox
+        LimpiarTextBox()
+        'Indicamos que creamos un nuevo registro
+        esNuevo = True
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -40,7 +57,7 @@ Public Class abmGastos
 
             If esNuevo Then
                 ' Código para guardar un nuevo registro
-                Dim cmd As String = "INSERT INTO gastos (idintegrante, monto, descripcion, forma_pago, tipo_gasto, cuotas, fecha) VALUES (@idint, @mon, @des, @fp, @tg, @cuo, @date)"
+                Dim cmd = "INSERT INTO gastos (idintegrante, monto, descripcion, forma_pago, tipo_gasto, cuotas, fecha) VALUES (@idint, @mon, @des, @fp, @tg, @cuo, @date)"
                 Dim comandoInsertar As New MySqlCommand(cmd, miConexion)
                 comandoInsertar.Parameters.AddWithValue("@idint", Integer.Parse(tbIntegrante.Text))
                 comandoInsertar.Parameters.AddWithValue("@mon", Decimal.Parse(tbMonto.Text))
@@ -53,7 +70,7 @@ Public Class abmGastos
                 esNuevo = False
             Else
                 ' Código para actualizar un registro existente
-                Dim cmd As String = "UPDATE gastos SET idintegrante = @idint, monto = @mon, descripcion = @des, forma_pago = @fp, tipo_gasto = @tg, cuotas = @cuo, fecha = @date WHERE idgasto = @idgasto"
+                Dim cmd = "UPDATE gastos SET idintegrante = @idint, monto = @mon, descripcion = @des, forma_pago = @fp, tipo_gasto = @tg, cuotas = @cuo, fecha = @date WHERE idgasto = @idgasto"
                 Dim comandoActualizar As New MySqlCommand(cmd, miConexion)
                 comandoActualizar.Parameters.AddWithValue("@idgasto", idgastoSeleccionado)
                 comandoActualizar.Parameters.AddWithValue("@idint", Integer.Parse(tbIntegrante.Text))
@@ -80,6 +97,60 @@ Public Class abmGastos
         End Try
     End Sub
 
+    'Función para editar registros
+    Private Sub btnEditar_Click(sender As Object, e As EventArgs) Handles btnEditar.Click
+        Try
+            ' Verificar que haya datos cargados en las TextBox
+            If String.IsNullOrWhiteSpace(tbIntegrante.Text) Then
+                MessageBox.Show("Por favor, seleccione un registro del DataGridView antes de editar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            ' Habilitar las TextBox para la edición
+            DesbloquearTextBox()
+
+            ' Indicar que no es un nuevo registro
+            esNuevo = False
+        Catch ex As Exception
+            MessageBox.Show("Error al habilitar la edición: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    'Función para eliminar registros
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+        Try
+            If DGVgastos.SelectedRows.Count = 0 Then
+                MessageBox.Show("Por favor, seleccione un registro para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            Dim confirmacion As DialogResult = MessageBox.Show($"¿Está seguro de que desea eliminar el registro con ID {idgastoSeleccionado}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+            If confirmacion = DialogResult.No Then
+                Return
+            End If
+
+            If miConexion.State = ConnectionState.Closed Then
+                miConexion.Open()
+            End If
+
+            Dim cmd As String = "DELETE FROM gastos WHERE idgasto = @idgasto"
+            Dim comandoEliminar As New MySqlCommand(cmd, miConexion)
+            comandoEliminar.Parameters.AddWithValue("@idgasto", idgastoSeleccionado)
+            comandoEliminar.ExecuteNonQuery()
+
+            ' Actualizar el DataGridView
+            ActualizarDataGridView()
+
+            MessageBox.Show("Registro eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error al eliminar el registro: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            If miConexion.State = ConnectionState.Open Then
+                miConexion.Close()
+            End If
+        End Try
+    End Sub
+
     'Funcion que bloquea las textbox
     Private Sub BloquearTextBox()
         tbIntegrante.Enabled = False
@@ -89,16 +160,6 @@ Public Class abmGastos
         tbTipoGasto.Enabled = False
         tbCuotas.Enabled = False
         DateTimePicker1.Enabled = False
-    End Sub
-
-    'Funcion del botón Nuevo
-    Private Sub btnNuevo_Click(sender As Object, e As EventArgs) Handles btnNuevo.Click
-        'Desbloqueamos las textbox
-        DesbloquearTextBox()
-        'Limpiamos las textbox
-        LimpiarTextBox()
-        'Indicamos que creamos un nuevo registro
-        esNuevo = True
     End Sub
 
     'Funcion que desbloquea las textbox
@@ -182,60 +243,6 @@ Public Class abmGastos
         End Try
     End Sub
 
-    'Función para eliminar registros
-    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
-        Try
-            If DGVgastos.SelectedRows.Count = 0 Then
-                MessageBox.Show("Por favor, seleccione un registro para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
-
-            Dim confirmacion As DialogResult = MessageBox.Show($"¿Está seguro de que desea eliminar el registro con ID {idgastoSeleccionado}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-            If confirmacion = DialogResult.No Then
-                Return
-            End If
-
-            If miConexion.State = ConnectionState.Closed Then
-                miConexion.Open()
-            End If
-
-            Dim cmd As String = "DELETE FROM gastos WHERE idgasto = @idgasto"
-            Dim comandoEliminar As New MySqlCommand(cmd, miConexion)
-            comandoEliminar.Parameters.AddWithValue("@idgasto", idgastoSeleccionado)
-            comandoEliminar.ExecuteNonQuery()
-
-            ' Actualizar el DataGridView
-            ActualizarDataGridView()
-
-            MessageBox.Show("Registro eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Catch ex As Exception
-            MessageBox.Show("Error al eliminar el registro: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            If miConexion.State = ConnectionState.Open Then
-                miConexion.Close()
-            End If
-        End Try
-    End Sub
-
-    'Función para editar registros
-    Private Sub btnEditar_Click(sender As Object, e As EventArgs) Handles btnEditar.Click
-        Try
-            ' Verificar que haya datos cargados en las TextBox
-            If String.IsNullOrWhiteSpace(tbIntegrante.Text) Then
-                MessageBox.Show("Por favor, seleccione un registro del DataGridView antes de editar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
-
-            ' Habilitar las TextBox para la edición
-            DesbloquearTextBox()
-
-            ' Indicar que no es un nuevo registro
-            esNuevo = False
-        Catch ex As Exception
-            MessageBox.Show("Error al habilitar la edición: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
     'Función para actualizar el DGV
     Private Sub ActualizarDataGridView()
         Try
@@ -263,5 +270,12 @@ Public Class abmGastos
         Catch ex As Exception
             MessageBox.Show("Error al filtrar los datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    'Cerrar la conexión al cerrar el formulario
+    Private Sub abmGastos_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If miConexion IsNot Nothing AndAlso miConexion.State = ConnectionState.Open Then
+            miConexion.Close()
+        End If
     End Sub
 End Class

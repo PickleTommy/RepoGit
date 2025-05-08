@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class calculosMonto
+Partial Class abmIngresos
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -38,7 +38,6 @@ Partial Class calculosMonto
         btnEliminar = New Button()
         btnGuardar = New Button()
         btnNuevo = New Button()
-        btnCalcular = New Button()
         CType(DGVcalculos, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         SuspendLayout()
@@ -196,24 +195,13 @@ Partial Class calculosMonto
         btnNuevo.Text = "Nuevo"
         btnNuevo.UseVisualStyleBackColor = True
         ' 
-        ' btnCalcular
-        ' 
-        btnCalcular.Font = New Font("Segoe UI", 12F)
-        btnCalcular.Location = New Point(599, 193)
-        btnCalcular.Name = "btnCalcular"
-        btnCalcular.Size = New Size(120, 57)
-        btnCalcular.TabIndex = 9
-        btnCalcular.Text = "Calcular Gastos"
-        btnCalcular.UseVisualStyleBackColor = True
-        ' 
-        ' calculosMonto
+        ' abmIngresos
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(825, 520)
         Controls.Add(btnEditar)
         Controls.Add(btnEliminar)
-        Controls.Add(btnCalcular)
         Controls.Add(btnGuardar)
         Controls.Add(btnNuevo)
         Controls.Add(DGVcalculos)
@@ -223,7 +211,7 @@ Partial Class calculosMonto
         Controls.Add(Label1)
         Controls.Add(Label2)
         Controls.Add(GroupBox1)
-        Name = "calculosMonto"
+        Name = "abmIngresos"
         Text = "calculosMonto"
         CType(DGVcalculos, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
@@ -247,5 +235,4 @@ Partial Class calculosMonto
     Friend WithEvents btnEliminar As Button
     Friend WithEvents btnGuardar As Button
     Friend WithEvents btnNuevo As Button
-    Friend WithEvents btnCalcular As Button
 End Class

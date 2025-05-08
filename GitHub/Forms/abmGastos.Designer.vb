@@ -22,6 +22,7 @@ Partial Class abmGastos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(abmGastos))
         DGVgastos = New DataGridView()
         btnEditar = New Button()
         btnEliminar = New Button()
@@ -31,6 +32,7 @@ Partial Class abmGastos
         Label6 = New Label()
         GroupBox1 = New GroupBox()
         DateTimePicker1 = New DateTimePicker()
+        tbAhorro = New TextBox()
         tbCuotas = New TextBox()
         tbDescripcion = New TextBox()
         tbFormaPago = New TextBox()
@@ -38,6 +40,7 @@ Partial Class abmGastos
         tbMonto = New TextBox()
         tbTipoGasto = New TextBox()
         Label7 = New Label()
+        Label9 = New Label()
         Label5 = New Label()
         Label8 = New Label()
         Label1 = New Label()
@@ -53,7 +56,7 @@ Partial Class abmGastos
         ' DGVgastos
         ' 
         DGVgastos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DGVgastos.Location = New Point(12, 286)
+        DGVgastos.Location = New Point(58, 370)
         DGVgastos.Name = "DGVgastos"
         DGVgastos.Size = New Size(829, 255)
         DGVgastos.TabIndex = 13
@@ -61,54 +64,46 @@ Partial Class abmGastos
         ' btnEditar
         ' 
         btnEditar.Font = New Font("Segoe UI", 12F)
-        btnEditar.Image = My.Resources.Resources.edit
-        btnEditar.ImageAlign = ContentAlignment.MiddleRight
-        btnEditar.Location = New Point(602, 139)
+        btnEditar.Image = CType(resources.GetObject("btnEditar.Image"), Image)
+        btnEditar.Location = New Point(656, 165)
         btnEditar.Name = "btnEditar"
-        btnEditar.Size = New Size(120, 56)
+        btnEditar.Size = New Size(112, 56)
         btnEditar.TabIndex = 8
-        btnEditar.Text = "Editar"
         btnEditar.UseVisualStyleBackColor = True
         ' 
         ' btnEliminar
         ' 
         btnEliminar.Font = New Font("Segoe UI", 12F)
-        btnEliminar.Image = My.Resources.Resources.remove
-        btnEliminar.ImageAlign = ContentAlignment.MiddleRight
-        btnEliminar.Location = New Point(601, 68)
+        btnEliminar.Image = CType(resources.GetObject("btnEliminar.Image"), Image)
+        btnEliminar.Location = New Point(656, 99)
         btnEliminar.Name = "btnEliminar"
-        btnEliminar.Size = New Size(121, 57)
+        btnEliminar.Size = New Size(112, 60)
         btnEliminar.TabIndex = 9
-        btnEliminar.Text = "Eliminar"
         btnEliminar.UseVisualStyleBackColor = True
         ' 
         ' btnGuardar
         ' 
         btnGuardar.Font = New Font("Segoe UI", 12F)
-        btnGuardar.Image = My.Resources.Resources.save
-        btnGuardar.ImageAlign = ContentAlignment.MiddleRight
-        btnGuardar.Location = New Point(450, 137)
+        btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), Image)
+        btnGuardar.Location = New Point(505, 164)
         btnGuardar.Name = "btnGuardar"
-        btnGuardar.Size = New Size(123, 57)
+        btnGuardar.Size = New Size(112, 57)
         btnGuardar.TabIndex = 11
-        btnGuardar.Text = "Guardar"
         btnGuardar.UseVisualStyleBackColor = True
         ' 
         ' btnNuevo
         ' 
         btnNuevo.Font = New Font("Segoe UI", 12F)
-        btnNuevo.Image = My.Resources.Resources.add
-        btnNuevo.ImageAlign = ContentAlignment.MiddleRight
-        btnNuevo.Location = New Point(450, 68)
+        btnNuevo.Image = CType(resources.GetObject("btnNuevo.Image"), Image)
+        btnNuevo.Location = New Point(505, 99)
         btnNuevo.Name = "btnNuevo"
-        btnNuevo.Size = New Size(123, 57)
+        btnNuevo.Size = New Size(112, 57)
         btnNuevo.TabIndex = 12
-        btnNuevo.Text = "Nuevo"
         btnNuevo.UseVisualStyleBackColor = True
         ' 
         ' tbGastos
         ' 
-        tbGastos.Location = New Point(58, 257)
+        tbGastos.Location = New Point(99, 341)
         tbGastos.Name = "tbGastos"
         tbGastos.Size = New Size(166, 23)
         tbGastos.TabIndex = 6
@@ -125,6 +120,7 @@ Partial Class abmGastos
         ' GroupBox1
         ' 
         GroupBox1.Controls.Add(DateTimePicker1)
+        GroupBox1.Controls.Add(tbAhorro)
         GroupBox1.Controls.Add(tbCuotas)
         GroupBox1.Controls.Add(tbDescripcion)
         GroupBox1.Controls.Add(tbFormaPago)
@@ -132,6 +128,7 @@ Partial Class abmGastos
         GroupBox1.Controls.Add(tbMonto)
         GroupBox1.Controls.Add(tbTipoGasto)
         GroupBox1.Controls.Add(Label7)
+        GroupBox1.Controls.Add(Label9)
         GroupBox1.Controls.Add(Label5)
         GroupBox1.Controls.Add(Label8)
         GroupBox1.Controls.Add(Label1)
@@ -140,17 +137,24 @@ Partial Class abmGastos
         GroupBox1.Controls.Add(Label4)
         GroupBox1.Location = New Point(37, 12)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(300, 239)
+        GroupBox1.Size = New Size(300, 278)
         GroupBox1.TabIndex = 7
         GroupBox1.TabStop = False
         GroupBox1.Text = "Gasto"
         ' 
         ' DateTimePicker1
         ' 
-        DateTimePicker1.Location = New Point(152, 203)
+        DateTimePicker1.Location = New Point(149, 231)
         DateTimePicker1.Name = "DateTimePicker1"
         DateTimePicker1.Size = New Size(136, 23)
         DateTimePicker1.TabIndex = 2
+        ' 
+        ' tbAhorro
+        ' 
+        tbAhorro.Location = New Point(149, 200)
+        tbAhorro.Name = "tbAhorro"
+        tbAhorro.Size = New Size(136, 23)
+        tbAhorro.TabIndex = 1
         ' 
         ' tbCuotas
         ' 
@@ -198,11 +202,21 @@ Partial Class abmGastos
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Segoe UI", 12F)
-        Label7.Location = New Point(90, 203)
+        Label7.Location = New Point(90, 231)
         Label7.Name = "Label7"
         Label7.Size = New Size(53, 21)
         Label7.TabIndex = 0
         Label7.Text = "Fecha:"
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Font = New Font("Segoe UI", 12F)
+        Label9.Location = New Point(82, 200)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(62, 21)
+        Label9.TabIndex = 0
+        Label9.Text = "Ahorro:"
         ' 
         ' Label5
         ' 
@@ -267,7 +281,7 @@ Partial Class abmGastos
         ' PictureBox1
         ' 
         PictureBox1.Image = My.Resources.Resources.find
-        PictureBox1.Location = New Point(22, 258)
+        PictureBox1.Location = New Point(58, 342)
         PictureBox1.Name = "PictureBox1"
         PictureBox1.Size = New Size(30, 22)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
@@ -278,7 +292,7 @@ Partial Class abmGastos
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(864, 550)
+        ClientSize = New Size(951, 637)
         Controls.Add(PictureBox1)
         Controls.Add(DGVgastos)
         Controls.Add(btnEditar)
@@ -321,4 +335,6 @@ Partial Class abmGastos
     Friend WithEvents tbIntegrante As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents tbAhorro As TextBox
+    Friend WithEvents Label9 As Label
 End Class

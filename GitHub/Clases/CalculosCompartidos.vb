@@ -6,4 +6,6 @@
     Public Shared TotalBasicos As Decimal
     Public Shared TotalDiscrecionales As Decimal
     Public Shared TotalExtraordinarios As Decimal
+    Public Shared AhorroIngreso As Decimal
+    Public Shared SaldoDisponible As Decimal
 End Class

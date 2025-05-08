@@ -28,7 +28,7 @@ Partial Class Form1
         Label1 = New Label()
         txtContraseña = New TextBox()
         GroupBox1 = New GroupBox()
-        Log = New Button()
+        btnLog = New Button()
         PictureBox1 = New PictureBox()
         GroupBox1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -70,7 +70,7 @@ Partial Class Form1
         ' 
         ' GroupBox1
         ' 
-        GroupBox1.Controls.Add(Log)
+        GroupBox1.Controls.Add(btnLog)
         GroupBox1.Controls.Add(txtContraseña)
         GroupBox1.Controls.Add(Label1)
         GroupBox1.Controls.Add(txtUsuario)
@@ -82,21 +82,21 @@ Partial Class Form1
         GroupBox1.TabStop = False
         GroupBox1.Text = "Login de usuario"
         ' 
-        ' Log
+        ' btnLog
         ' 
-        Log.Location = New Point(133, 97)
-        Log.Name = "Log"
-        Log.Size = New Size(100, 29)
-        Log.TabIndex = 2
-        Log.Text = "Iniciar Sesión"
-        Log.UseVisualStyleBackColor = True
+        btnLog.Location = New Point(133, 97)
+        btnLog.Name = "btnLog"
+        btnLog.Size = New Size(100, 29)
+        btnLog.TabIndex = 2
+        btnLog.Text = "Iniciar Sesión"
+        btnLog.UseVisualStyleBackColor = True
         ' 
         ' PictureBox1
         ' 
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(104, 12)
+        PictureBox1.Location = New Point(-78, -5)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(586, 287)
+        PictureBox1.Size = New Size(940, 535)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 3
         PictureBox1.TabStop = False
@@ -106,8 +106,8 @@ Partial Class Form1
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(804, 472)
-        Controls.Add(PictureBox1)
         Controls.Add(GroupBox1)
+        Controls.Add(PictureBox1)
         Name = "Form1"
         Text = "Login"
         GroupBox1.ResumeLayout(False)
@@ -121,6 +121,6 @@ Partial Class Form1
     Friend WithEvents Label1 As Label
     Friend WithEvents txtContraseña As TextBox
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Log As Button
+    Friend WithEvents btnLog As Button
     Friend WithEvents PictureBox1 As PictureBox
 End Class
