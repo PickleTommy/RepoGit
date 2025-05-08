@@ -22,8 +22,6 @@ Partial Class abmIngresos
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Label2 = New Label()
-        tbPorcentajeAhorro = New TextBox()
         DGVcalculos = New DataGridView()
         Label1 = New Label()
         tbIntegrante = New TextBox()
@@ -42,24 +40,6 @@ Partial Class abmIngresos
         GroupBox1.SuspendLayout()
         SuspendLayout()
         ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.Font = New Font("Segoe UI", 12F)
-        Label2.Location = New Point(37, 50)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(157, 21)
-        Label2.TabIndex = 0
-        Label2.Text = "Porcentaje de ahorro:"
-        ' 
-        ' tbPorcentajeAhorro
-        ' 
-        tbPorcentajeAhorro.Font = New Font("Segoe UI", 12F)
-        tbPorcentajeAhorro.Location = New Point(200, 47)
-        tbPorcentajeAhorro.Name = "tbPorcentajeAhorro"
-        tbPorcentajeAhorro.Size = New Size(219, 29)
-        tbPorcentajeAhorro.TabIndex = 1
-        ' 
         ' DGVcalculos
         ' 
         DGVcalculos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -72,7 +52,7 @@ Partial Class abmIngresos
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 12F)
-        Label1.Location = New Point(106, 92)
+        Label1.Location = New Point(72, 40)
         Label1.Name = "Label1"
         Label1.Size = New Size(88, 21)
         Label1.TabIndex = 0
@@ -81,7 +61,7 @@ Partial Class abmIngresos
         ' tbIntegrante
         ' 
         tbIntegrante.Font = New Font("Segoe UI", 12F)
-        tbIntegrante.Location = New Point(200, 89)
+        tbIntegrante.Location = New Point(166, 37)
         tbIntegrante.Name = "tbIntegrante"
         tbIntegrante.Size = New Size(219, 29)
         tbIntegrante.TabIndex = 1
@@ -90,7 +70,7 @@ Partial Class abmIngresos
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 12F)
-        Label3.Location = New Point(131, 130)
+        Label3.Location = New Point(97, 78)
         Label3.Name = "Label3"
         Label3.Size = New Size(63, 21)
         Label3.TabIndex = 0
@@ -99,7 +79,7 @@ Partial Class abmIngresos
         ' tbMonto
         ' 
         tbMonto.Font = New Font("Segoe UI", 12F)
-        tbMonto.Location = New Point(168, 100)
+        tbMonto.Location = New Point(166, 72)
         tbMonto.Name = "tbMonto"
         tbMonto.Size = New Size(219, 29)
         tbMonto.TabIndex = 1
@@ -108,7 +88,7 @@ Partial Class abmIngresos
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Segoe UI", 12F)
-        Label4.Location = New Point(98, 142)
+        Label4.Location = New Point(96, 114)
         Label4.Name = "Label4"
         Label4.Size = New Size(64, 21)
         Label4.TabIndex = 0
@@ -117,7 +97,7 @@ Partial Class abmIngresos
         ' tbFuente
         ' 
         tbFuente.Font = New Font("Segoe UI", 12F)
-        tbFuente.Location = New Point(168, 139)
+        tbFuente.Location = New Point(166, 111)
         tbFuente.Name = "tbFuente"
         tbFuente.Size = New Size(219, 29)
         tbFuente.TabIndex = 1
@@ -126,7 +106,7 @@ Partial Class abmIngresos
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 12F)
-        Label5.Location = New Point(109, 178)
+        Label5.Location = New Point(107, 150)
         Label5.Name = "Label5"
         Label5.Size = New Size(53, 21)
         Label5.TabIndex = 0
@@ -136,7 +116,7 @@ Partial Class abmIngresos
         ' 
         DateTimePicker1.CalendarFont = New Font("Segoe UI", 12F)
         DateTimePicker1.Font = New Font("Segoe UI", 12F)
-        DateTimePicker1.Location = New Point(168, 178)
+        DateTimePicker1.Location = New Point(166, 150)
         DateTimePicker1.Name = "DateTimePicker1"
         DateTimePicker1.Size = New Size(219, 29)
         DateTimePicker1.TabIndex = 4
@@ -148,9 +128,12 @@ Partial Class abmIngresos
         GroupBox1.Controls.Add(Label4)
         GroupBox1.Controls.Add(tbFuente)
         GroupBox1.Controls.Add(Label5)
+        GroupBox1.Controls.Add(tbIntegrante)
+        GroupBox1.Controls.Add(Label3)
+        GroupBox1.Controls.Add(Label1)
         GroupBox1.Location = New Point(32, 27)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(416, 238)
+        GroupBox1.Size = New Size(428, 228)
         GroupBox1.TabIndex = 6
         GroupBox1.TabStop = False
         GroupBox1.Text = "Ingresos"
@@ -205,11 +188,6 @@ Partial Class abmIngresos
         Controls.Add(btnGuardar)
         Controls.Add(btnNuevo)
         Controls.Add(DGVcalculos)
-        Controls.Add(tbIntegrante)
-        Controls.Add(tbPorcentajeAhorro)
-        Controls.Add(Label3)
-        Controls.Add(Label1)
-        Controls.Add(Label2)
         Controls.Add(GroupBox1)
         Name = "abmIngresos"
         Text = "calculosMonto"
@@ -217,10 +195,7 @@ Partial Class abmIngresos
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         ResumeLayout(False)
-        PerformLayout()
     End Sub
-    Friend WithEvents Label2 As Label
-    Friend WithEvents tbPorcentajeAhorro As TextBox
     Friend WithEvents DGVcalculos As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents tbIntegrante As TextBox

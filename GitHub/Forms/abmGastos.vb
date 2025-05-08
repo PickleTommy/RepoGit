@@ -12,11 +12,17 @@ Public Class abmGastos
         Try
             ' Conexión existente a la tabla 'gastos'
             miConexion = New MySqlConnection("Server=LocalHost;Uid=root;Pwd=;database=bdproyectoprog")
+
+            ' Creamos el DataAdapter para la tabla Gastos
             gastosDA = New MySqlDataAdapter()
             gastosDA.SelectCommand = New MySqlCommand("SELECT * FROM gastos", miConexion)
+
+            ' Creamos el DataSet y llenamos la tabla
             proyectoDS = New DataSet()
             proyectoDS.Tables.Add("Gastos")
             gastosDA.Fill(proyectoDS.Tables("Gastos"))
+
+            ' Vinculamos el DataGridView
             DGVgastos.DataSource = proyectoDS.Tables("Gastos")
 
             ' Bloquear las TextBox

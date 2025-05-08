@@ -19,6 +19,7 @@ Public Class Calculos
             calculosDS = New DataSet()
             calculosDS.Tables.Add("Calculos")
 
+            'Carga de datos en el DataSet
             calculosDA.Fill(calculosDS.Tables("Calculos"))
         Catch ex As Exception
             MessageBox.Show("Error al conectar con la base de datos: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -125,9 +126,42 @@ Public Class Calculos
 
     Private Sub GenerarPDF()
         Try
+            ' Consultar los datos más recientes de la tabla 'calculos'
+            Dim cmd As String = "SELECT * FROM calculos ORDER BY idcalculos DESC LIMIT 1"
+            Dim comando As New MySqlCommand(cmd, miConexion)
+            Dim reader As MySqlDataReader
+
+            ' Abrir la conexión si está cerrada
+            If miConexion.State = ConnectionState.Closed Then
+                miConexion.Open()
+            End If
+
+            reader = comando.ExecuteReader()
+
+            ' Variables para almacenar los datos
+            Dim totalIngresos As Decimal = 0
+            Dim totalGB As Decimal = 0
+            Dim totalGD As Decimal = 0
+            Dim totalGE As Decimal = 0
+            Dim ahorroMonto As Decimal = 0
+            Dim saldoDisponible As Decimal = 0
+
+            If reader.Read() Then
+                totalIngresos = Convert.ToDecimal(reader("totalingreso"))
+                totalGB = Convert.ToDecimal(reader("totalgb"))
+                totalGD = Convert.ToDecimal(reader("totalgd"))
+                totalGE = Convert.ToDecimal(reader("totalge"))
+                ahorroMonto = Convert.ToDecimal(reader("ahorromonto"))
+                saldoDisponible = Convert.ToDecimal(reader("saldodisponible"))
+            End If
+
+            reader.Close()
+
             ' Configurar el documento para imprimir
             Dim printDoc As New PrintDocument()
-            AddHandler printDoc.PrintPage, AddressOf PrintPageHandler
+            AddHandler printDoc.PrintPage, Sub(sender, e)
+                                               PrintPageHandler(e, totalIngresos, totalGB, totalGD, totalGE, ahorroMonto, saldoDisponible)
+                                           End Sub
 
             ' Configurar el diálogo para guardar el PDF
             Dim saveDialog As New SaveFileDialog()
@@ -149,10 +183,15 @@ Public Class Calculos
             End If
         Catch ex As Exception
             MessageBox.Show("Error al generar el PDF: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Asegurarse de cerrar la conexión
+            If miConexion.State = ConnectionState.Open Then
+                miConexion.Close()
+            End If
         End Try
     End Sub
 
-    Private Sub PrintPageHandler(sender As Object, e As PrintPageEventArgs)
+    Private Sub PrintPageHandler(e As PrintPageEventArgs, totalIngresos As Decimal, totalGB As Decimal, totalGD As Decimal, totalGE As Decimal, ahorroMonto As Decimal, saldoDisponible As Decimal)
         ' Configurar el contenido del PDF
         Dim font As New Font("Arial", 12)
         Dim y As Integer = 20
@@ -160,17 +199,17 @@ Public Class Calculos
         e.Graphics.DrawString("Resumen de Cálculos", New Font("Arial", 16, FontStyle.Bold), Brushes.Black, 20, y)
         y += 40
 
-        ' Aquí puedes agregar los datos que deseas incluir en el PDF
-        e.Graphics.DrawString("Total Ingresos: 1000.00", font, Brushes.Black, 20, y)
+        ' Agregar los datos obtenidos de la base de datos
+        e.Graphics.DrawString($"Total Ingresos: {totalIngresos:C2}", font, Brushes.Black, 20, y)
         y += 20
-        e.Graphics.DrawString("Gastos Básicos: 500.00", font, Brushes.Black, 20, y)
+        e.Graphics.DrawString($"Gastos Básicos: {totalGB:C2}", font, Brushes.Black, 20, y)
         y += 20
-        e.Graphics.DrawString("Gastos Discrecionales: 200.00", font, Brushes.Black, 20, y)
+        e.Graphics.DrawString($"Gastos Discrecionales: {totalGD:C2}", font, Brushes.Black, 20, y)
         y += 20
-        e.Graphics.DrawString("Gastos Extraordinarios: 100.00", font, Brushes.Black, 20, y)
+        e.Graphics.DrawString($"Gastos Extraordinarios: {totalGE:C2}", font, Brushes.Black, 20, y)
         y += 20
-        e.Graphics.DrawString("Monto Ahorro: 200.00", font, Brushes.Black, 20, y)
+        e.Graphics.DrawString($"Monto Ahorro: {ahorroMonto:C2}", font, Brushes.Black, 20, y)
         y += 20
-        e.Graphics.DrawString("Saldo Disponible: 0.00", font, Brushes.Black, 20, y)
+        e.Graphics.DrawString($"Saldo Disponible: {saldoDisponible:C2}", font, Brushes.Black, 20, y)
     End Sub
 End Class
