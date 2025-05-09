@@ -37,9 +37,10 @@ Partial Class Form1
         ' Usuario
         ' 
         Usuario.AutoSize = True
-        Usuario.Location = New Point(54, 28)
+        Usuario.Font = New Font("Segoe UI", 10F)
+        Usuario.Location = New Point(22, 26)
         Usuario.Name = "Usuario"
-        Usuario.Size = New Size(50, 15)
+        Usuario.Size = New Size(59, 19)
         Usuario.TabIndex = 0
         Usuario.Text = "Usuario:"
         ' 
@@ -53,9 +54,10 @@ Partial Class Form1
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(34, 57)
+        Label1.Font = New Font("Segoe UI", 10F)
+        Label1.Location = New Point(22, 55)
         Label1.Name = "Label1"
-        Label1.Size = New Size(70, 15)
+        Label1.Size = New Size(82, 19)
         Label1.TabIndex = 0
         Label1.Text = "Contraseña:"
         ' 
@@ -70,12 +72,15 @@ Partial Class Form1
         ' 
         ' GroupBox1
         ' 
+        GroupBox1.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
         GroupBox1.Controls.Add(btnLog)
         GroupBox1.Controls.Add(txtContraseña)
         GroupBox1.Controls.Add(Label1)
         GroupBox1.Controls.Add(txtUsuario)
         GroupBox1.Controls.Add(Usuario)
-        GroupBox1.Location = New Point(206, 305)
+        GroupBox1.Font = New Font("Segoe UI", 9F)
+        GroupBox1.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
+        GroupBox1.Location = New Point(223, 298)
         GroupBox1.Name = "GroupBox1"
         GroupBox1.Size = New Size(375, 143)
         GroupBox1.TabIndex = 2
@@ -84,19 +89,21 @@ Partial Class Form1
         ' 
         ' btnLog
         ' 
+        btnLog.BackColor = Color.FromArgb(CByte(19), CByte(56), CByte(66))
+        btnLog.FlatStyle = FlatStyle.Flat
         btnLog.Location = New Point(133, 97)
         btnLog.Name = "btnLog"
         btnLog.Size = New Size(100, 29)
         btnLog.TabIndex = 2
         btnLog.Text = "Iniciar Sesión"
-        btnLog.UseVisualStyleBackColor = True
+        btnLog.UseVisualStyleBackColor = False
         ' 
         ' PictureBox1
         ' 
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(-78, -5)
+        PictureBox1.Location = New Point(-59, -2)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(940, 535)
+        PictureBox1.Size = New Size(940, 489)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 3
         PictureBox1.TabStop = False
@@ -105,6 +112,7 @@ Partial Class Form1
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.White
         ClientSize = New Size(804, 472)
         Controls.Add(GroupBox1)
         Controls.Add(PictureBox1)

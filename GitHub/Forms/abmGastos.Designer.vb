@@ -55,51 +55,72 @@ Partial Class abmGastos
         ' 
         ' DGVgastos
         ' 
+        DGVgastos.BackgroundColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
         DGVgastos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DGVgastos.Location = New Point(58, 370)
+        DGVgastos.Location = New Point(27, 370)
         DGVgastos.Name = "DGVgastos"
-        DGVgastos.Size = New Size(829, 255)
+        DGVgastos.Size = New Size(896, 245)
         DGVgastos.TabIndex = 13
         ' 
         ' btnEditar
         ' 
-        btnEditar.Font = New Font("Segoe UI", 12F)
+        btnEditar.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
+        btnEditar.FlatStyle = FlatStyle.Flat
+        btnEditar.Font = New Font("Segoe UI", 11F)
+        btnEditar.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
         btnEditar.Image = CType(resources.GetObject("btnEditar.Image"), Image)
-        btnEditar.Location = New Point(656, 165)
+        btnEditar.ImageAlign = ContentAlignment.MiddleRight
+        btnEditar.Location = New Point(658, 191)
         btnEditar.Name = "btnEditar"
-        btnEditar.Size = New Size(112, 56)
+        btnEditar.Size = New Size(119, 61)
         btnEditar.TabIndex = 8
-        btnEditar.UseVisualStyleBackColor = True
+        btnEditar.Text = "Editar"
+        btnEditar.UseVisualStyleBackColor = False
         ' 
         ' btnEliminar
         ' 
-        btnEliminar.Font = New Font("Segoe UI", 12F)
-        btnEliminar.Image = CType(resources.GetObject("btnEliminar.Image"), Image)
-        btnEliminar.Location = New Point(656, 99)
+        btnEliminar.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
+        btnEliminar.FlatStyle = FlatStyle.Flat
+        btnEliminar.Font = New Font("Segoe UI", 11F)
+        btnEliminar.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
+        btnEliminar.Image = My.Resources.Resources.remove
+        btnEliminar.ImageAlign = ContentAlignment.MiddleRight
+        btnEliminar.Location = New Point(658, 107)
         btnEliminar.Name = "btnEliminar"
-        btnEliminar.Size = New Size(112, 60)
+        btnEliminar.Size = New Size(119, 61)
         btnEliminar.TabIndex = 9
-        btnEliminar.UseVisualStyleBackColor = True
+        btnEliminar.Text = "Eliminar"
+        btnEliminar.UseVisualStyleBackColor = False
         ' 
         ' btnGuardar
         ' 
-        btnGuardar.Font = New Font("Segoe UI", 12F)
+        btnGuardar.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
+        btnGuardar.FlatStyle = FlatStyle.Flat
+        btnGuardar.Font = New Font("Segoe UI", 11F)
+        btnGuardar.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
         btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), Image)
-        btnGuardar.Location = New Point(505, 164)
+        btnGuardar.ImageAlign = ContentAlignment.MiddleRight
+        btnGuardar.Location = New Point(521, 191)
         btnGuardar.Name = "btnGuardar"
-        btnGuardar.Size = New Size(112, 57)
+        btnGuardar.Size = New Size(119, 61)
         btnGuardar.TabIndex = 11
-        btnGuardar.UseVisualStyleBackColor = True
+        btnGuardar.Text = "Guardar"
+        btnGuardar.UseVisualStyleBackColor = False
         ' 
         ' btnNuevo
         ' 
-        btnNuevo.Font = New Font("Segoe UI", 12F)
+        btnNuevo.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
+        btnNuevo.FlatStyle = FlatStyle.Flat
+        btnNuevo.Font = New Font("Segoe UI", 11F)
+        btnNuevo.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
         btnNuevo.Image = CType(resources.GetObject("btnNuevo.Image"), Image)
-        btnNuevo.Location = New Point(505, 99)
+        btnNuevo.ImageAlign = ContentAlignment.MiddleRight
+        btnNuevo.Location = New Point(521, 107)
         btnNuevo.Name = "btnNuevo"
-        btnNuevo.Size = New Size(112, 57)
+        btnNuevo.Size = New Size(119, 61)
         btnNuevo.TabIndex = 12
-        btnNuevo.UseVisualStyleBackColor = True
+        btnNuevo.Text = "Nuevo"
+        btnNuevo.UseVisualStyleBackColor = False
         ' 
         ' tbGastos
         ' 
@@ -119,6 +140,7 @@ Partial Class abmGastos
         ' 
         ' GroupBox1
         ' 
+        GroupBox1.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
         GroupBox1.Controls.Add(DateTimePicker1)
         GroupBox1.Controls.Add(tbAhorro)
         GroupBox1.Controls.Add(tbCuotas)
@@ -135,9 +157,11 @@ Partial Class abmGastos
         GroupBox1.Controls.Add(Label2)
         GroupBox1.Controls.Add(Label3)
         GroupBox1.Controls.Add(Label4)
+        GroupBox1.FlatStyle = FlatStyle.Flat
+        GroupBox1.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
         GroupBox1.Location = New Point(37, 12)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(300, 278)
+        GroupBox1.Size = New Size(311, 271)
         GroupBox1.TabIndex = 7
         GroupBox1.TabStop = False
         GroupBox1.Text = "Gasto"
@@ -202,7 +226,7 @@ Partial Class abmGastos
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Segoe UI", 12F)
-        Label7.Location = New Point(90, 231)
+        Label7.Location = New Point(17, 231)
         Label7.Name = "Label7"
         Label7.Size = New Size(53, 21)
         Label7.TabIndex = 0
@@ -212,7 +236,7 @@ Partial Class abmGastos
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe UI", 12F)
-        Label9.Location = New Point(82, 200)
+        Label9.Location = New Point(16, 198)
         Label9.Name = "Label9"
         Label9.Size = New Size(62, 21)
         Label9.TabIndex = 0
@@ -222,7 +246,7 @@ Partial Class abmGastos
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 12F)
-        Label5.Location = New Point(82, 173)
+        Label5.Location = New Point(17, 169)
         Label5.Name = "Label5"
         Label5.Size = New Size(61, 21)
         Label5.TabIndex = 0
@@ -232,7 +256,7 @@ Partial Class abmGastos
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Segoe UI", 12F)
-        Label8.Location = New Point(55, 19)
+        Label8.Location = New Point(15, 19)
         Label8.Name = "Label8"
         Label8.Size = New Size(88, 21)
         Label8.TabIndex = 0
@@ -242,7 +266,7 @@ Partial Class abmGastos
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 12F)
-        Label1.Location = New Point(80, 45)
+        Label1.Location = New Point(15, 45)
         Label1.Name = "Label1"
         Label1.Size = New Size(63, 21)
         Label1.TabIndex = 0
@@ -252,7 +276,7 @@ Partial Class abmGastos
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 12F)
-        Label2.Location = New Point(45, 76)
+        Label2.Location = New Point(15, 74)
         Label2.Name = "Label2"
         Label2.Size = New Size(98, 21)
         Label2.TabIndex = 0
@@ -262,7 +286,7 @@ Partial Class abmGastos
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 12F)
-        Label3.Location = New Point(21, 107)
+        Label3.Location = New Point(15, 104)
         Label3.Name = "Label3"
         Label3.Size = New Size(122, 21)
         Label3.TabIndex = 0
@@ -272,7 +296,7 @@ Partial Class abmGastos
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Segoe UI", 12F)
-        Label4.Location = New Point(35, 141)
+        Label4.Location = New Point(15, 137)
         Label4.Name = "Label4"
         Label4.Size = New Size(108, 21)
         Label4.TabIndex = 0
@@ -280,10 +304,11 @@ Partial Class abmGastos
         ' 
         ' PictureBox1
         ' 
+        PictureBox1.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
         PictureBox1.Image = My.Resources.Resources.find
-        PictureBox1.Location = New Point(58, 342)
+        PictureBox1.Location = New Point(54, 330)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(30, 22)
+        PictureBox1.Size = New Size(35, 34)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 14
         PictureBox1.TabStop = False
@@ -292,6 +317,8 @@ Partial Class abmGastos
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
+        BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
+        BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(951, 637)
         Controls.Add(PictureBox1)
         Controls.Add(DGVgastos)

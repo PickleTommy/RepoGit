@@ -22,6 +22,7 @@ Partial Class abmIntegrantes
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(abmIntegrantes))
         Label1 = New Label()
         Label2 = New Label()
         Label3 = New Label()
@@ -52,7 +53,7 @@ Partial Class abmIntegrantes
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 12F)
-        Label1.Location = New Point(71, 19)
+        Label1.Location = New Point(11, 19)
         Label1.Name = "Label1"
         Label1.Size = New Size(71, 21)
         Label1.TabIndex = 0
@@ -62,7 +63,7 @@ Partial Class abmIntegrantes
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 12F)
-        Label2.Location = New Point(71, 50)
+        Label2.Location = New Point(11, 50)
         Label2.Name = "Label2"
         Label2.Size = New Size(74, 21)
         Label2.TabIndex = 0
@@ -72,7 +73,7 @@ Partial Class abmIntegrantes
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 12F)
-        Label3.Location = New Point(94, 80)
+        Label3.Location = New Point(11, 81)
         Label3.Name = "Label3"
         Label3.Size = New Size(51, 21)
         Label3.TabIndex = 0
@@ -82,7 +83,7 @@ Partial Class abmIntegrantes
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Segoe UI", 12F)
-        Label4.Location = New Point(106, 114)
+        Label4.Location = New Point(11, 110)
         Label4.Name = "Label4"
         Label4.Size = New Size(36, 21)
         Label4.TabIndex = 0
@@ -92,7 +93,7 @@ Partial Class abmIntegrantes
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Segoe UI", 12F)
-        Label5.Location = New Point(102, 145)
+        Label5.Location = New Point(11, 145)
         Label5.Name = "Label5"
         Label5.Size = New Size(40, 21)
         Label5.TabIndex = 0
@@ -145,6 +146,7 @@ Partial Class abmIntegrantes
         ' 
         ' GroupBox1
         ' 
+        GroupBox1.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
         GroupBox1.Controls.Add(DateTimePicker1)
         GroupBox1.Controls.Add(tbDNI)
         GroupBox1.Controls.Add(tbApellido)
@@ -157,9 +159,10 @@ Partial Class abmIntegrantes
         GroupBox1.Controls.Add(Label2)
         GroupBox1.Controls.Add(Label3)
         GroupBox1.Controls.Add(Label4)
+        GroupBox1.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
         GroupBox1.Location = New Point(21, 22)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(293, 216)
+        GroupBox1.Size = New Size(307, 219)
         GroupBox1.TabIndex = 2
         GroupBox1.TabStop = False
         GroupBox1.Text = "Integrante"
@@ -182,7 +185,7 @@ Partial Class abmIntegrantes
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Segoe UI", 12F)
-        Label7.Location = New Point(6, 177)
+        Label7.Location = New Point(11, 177)
         Label7.Name = "Label7"
         Label7.Size = New Size(141, 21)
         Label7.TabIndex = 0
@@ -190,62 +193,76 @@ Partial Class abmIntegrantes
         ' 
         ' btnNuevo
         ' 
+        btnNuevo.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
+        btnNuevo.FlatStyle = FlatStyle.Flat
         btnNuevo.Font = New Font("Segoe UI", 12F)
-        btnNuevo.Image = My.Resources.Resources.add
+        btnNuevo.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
+        btnNuevo.Image = CType(resources.GetObject("btnNuevo.Image"), Image)
         btnNuevo.ImageAlign = ContentAlignment.MiddleRight
-        btnNuevo.Location = New Point(435, 81)
+        btnNuevo.Location = New Point(466, 78)
         btnNuevo.Name = "btnNuevo"
         btnNuevo.Size = New Size(123, 57)
         btnNuevo.TabIndex = 3
         btnNuevo.Text = "Nuevo"
-        btnNuevo.UseVisualStyleBackColor = True
+        btnNuevo.UseVisualStyleBackColor = False
         ' 
         ' btnGuardar
         ' 
+        btnGuardar.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
+        btnGuardar.FlatStyle = FlatStyle.Flat
         btnGuardar.Font = New Font("Segoe UI", 12F)
-        btnGuardar.Image = My.Resources.Resources.save
+        btnGuardar.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
+        btnGuardar.Image = CType(resources.GetObject("btnGuardar.Image"), Image)
         btnGuardar.ImageAlign = ContentAlignment.MiddleRight
-        btnGuardar.Location = New Point(435, 150)
+        btnGuardar.Location = New Point(466, 147)
         btnGuardar.Name = "btnGuardar"
         btnGuardar.Size = New Size(123, 57)
         btnGuardar.TabIndex = 3
         btnGuardar.Text = "Guardar"
-        btnGuardar.UseVisualStyleBackColor = True
+        btnGuardar.UseVisualStyleBackColor = False
         ' 
         ' btnEliminar
         ' 
+        btnEliminar.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
+        btnEliminar.FlatStyle = FlatStyle.Flat
         btnEliminar.Font = New Font("Segoe UI", 12F)
+        btnEliminar.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
         btnEliminar.Image = My.Resources.Resources.remove
         btnEliminar.ImageAlign = ContentAlignment.MiddleRight
-        btnEliminar.Location = New Point(586, 81)
+        btnEliminar.Location = New Point(617, 78)
         btnEliminar.Name = "btnEliminar"
         btnEliminar.Size = New Size(121, 57)
         btnEliminar.TabIndex = 3
         btnEliminar.Text = "Eliminar"
-        btnEliminar.UseVisualStyleBackColor = True
+        btnEliminar.UseVisualStyleBackColor = False
         ' 
         ' DGVintegrantes
         ' 
+        DGVintegrantes.BackgroundColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
         DGVintegrantes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DGVintegrantes.Location = New Point(21, 296)
         DGVintegrantes.Name = "DGVintegrantes"
-        DGVintegrantes.Size = New Size(732, 255)
+        DGVintegrantes.Size = New Size(822, 255)
         DGVintegrantes.TabIndex = 4
         ' 
         ' btnEditar
         ' 
+        btnEditar.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
+        btnEditar.FlatStyle = FlatStyle.Flat
         btnEditar.Font = New Font("Segoe UI", 12F)
-        btnEditar.Image = My.Resources.Resources.edit
+        btnEditar.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
+        btnEditar.Image = CType(resources.GetObject("btnEditar.Image"), Image)
         btnEditar.ImageAlign = ContentAlignment.MiddleRight
-        btnEditar.Location = New Point(587, 152)
+        btnEditar.Location = New Point(618, 149)
         btnEditar.Name = "btnEditar"
         btnEditar.Size = New Size(120, 56)
         btnEditar.TabIndex = 3
         btnEditar.Text = "Editar"
-        btnEditar.UseVisualStyleBackColor = True
+        btnEditar.UseVisualStyleBackColor = False
         ' 
         ' PictureBox1
         ' 
+        PictureBox1.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
         PictureBox1.Image = My.Resources.Resources.find
         PictureBox1.Location = New Point(21, 257)
         PictureBox1.Name = "PictureBox1"
@@ -258,6 +275,8 @@ Partial Class abmIntegrantes
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
+        BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
+        BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(866, 572)
         Controls.Add(PictureBox1)
         Controls.Add(DGVintegrantes)

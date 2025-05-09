@@ -290,6 +290,9 @@ Public Class abmIngresos
         End Try
     End Function
 
+    Private Sub DGVcalculos_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVcalculos.CellContentClick
+
+    End Sub
 End Class
 
 
