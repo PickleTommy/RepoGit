@@ -103,7 +103,7 @@ Partial Class Form1
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
         PictureBox1.Location = New Point(-59, -2)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(940, 489)
+        PictureBox1.Size = New Size(933, 486)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 3
         PictureBox1.TabStop = False
