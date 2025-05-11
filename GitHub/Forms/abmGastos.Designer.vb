@@ -32,7 +32,6 @@ Partial Class abmGastos
         Label6 = New Label()
         GroupBox1 = New GroupBox()
         DateTimePicker1 = New DateTimePicker()
-        tbAhorro = New TextBox()
         tbCuotas = New TextBox()
         tbDescripcion = New TextBox()
         tbFormaPago = New TextBox()
@@ -40,7 +39,6 @@ Partial Class abmGastos
         tbMonto = New TextBox()
         tbTipoGasto = New TextBox()
         Label7 = New Label()
-        Label9 = New Label()
         Label5 = New Label()
         Label8 = New Label()
         Label1 = New Label()
@@ -142,7 +140,6 @@ Partial Class abmGastos
         ' 
         GroupBox1.BackColor = Color.FromArgb(CByte(9), CByte(33), CByte(40))
         GroupBox1.Controls.Add(DateTimePicker1)
-        GroupBox1.Controls.Add(tbAhorro)
         GroupBox1.Controls.Add(tbCuotas)
         GroupBox1.Controls.Add(tbDescripcion)
         GroupBox1.Controls.Add(tbFormaPago)
@@ -150,7 +147,6 @@ Partial Class abmGastos
         GroupBox1.Controls.Add(tbMonto)
         GroupBox1.Controls.Add(tbTipoGasto)
         GroupBox1.Controls.Add(Label7)
-        GroupBox1.Controls.Add(Label9)
         GroupBox1.Controls.Add(Label5)
         GroupBox1.Controls.Add(Label8)
         GroupBox1.Controls.Add(Label1)
@@ -161,24 +157,17 @@ Partial Class abmGastos
         GroupBox1.ForeColor = Color.FromArgb(CByte(16), CByte(176), CByte(253))
         GroupBox1.Location = New Point(37, 12)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(311, 271)
+        GroupBox1.Size = New Size(330, 248)
         GroupBox1.TabIndex = 7
         GroupBox1.TabStop = False
         GroupBox1.Text = "Gasto"
         ' 
         ' DateTimePicker1
         ' 
-        DateTimePicker1.Location = New Point(149, 231)
+        DateTimePicker1.Location = New Point(149, 200)
         DateTimePicker1.Name = "DateTimePicker1"
         DateTimePicker1.Size = New Size(136, 23)
         DateTimePicker1.TabIndex = 2
-        ' 
-        ' tbAhorro
-        ' 
-        tbAhorro.Location = New Point(149, 200)
-        tbAhorro.Name = "tbAhorro"
-        tbAhorro.Size = New Size(136, 23)
-        tbAhorro.TabIndex = 1
         ' 
         ' tbCuotas
         ' 
@@ -226,21 +215,11 @@ Partial Class abmGastos
         ' 
         Label7.AutoSize = True
         Label7.Font = New Font("Segoe UI", 12F)
-        Label7.Location = New Point(17, 231)
+        Label7.Location = New Point(17, 201)
         Label7.Name = "Label7"
         Label7.Size = New Size(53, 21)
         Label7.TabIndex = 0
         Label7.Text = "Fecha:"
-        ' 
-        ' Label9
-        ' 
-        Label9.AutoSize = True
-        Label9.Font = New Font("Segoe UI", 12F)
-        Label9.Location = New Point(16, 198)
-        Label9.Name = "Label9"
-        Label9.Size = New Size(62, 21)
-        Label9.TabIndex = 0
-        Label9.Text = "Ahorro:"
         ' 
         ' Label5
         ' 
