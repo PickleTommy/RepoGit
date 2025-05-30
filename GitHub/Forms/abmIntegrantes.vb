@@ -66,8 +66,7 @@ Public Class abmIntegrantes
                 comandoInsertar.ExecuteNonQuery()
                 esNuevo = False
             Else
-                ' Código para actualizar un registro existente
-                ' Verificar si el DNI ha cambiado
+                ' Verifica que no existan DNIs iguales o duplicados
                 If dniSeleccionado <> tbDNI.Text Then
                     ' Verificar si el nuevo DNI ya existe en la base de datos
                     Dim consultaExiste As String = "SELECT COUNT(*) FROM integrantes WHERE dni = @dni"
